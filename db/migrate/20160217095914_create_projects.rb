@@ -12,3 +12,4 @@ class CreateProjects < ActiveRecord::Migration
     end
   end
 end
+  

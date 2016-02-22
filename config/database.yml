@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  username: kvp
+  username: root
   password: root
   database: promax_development
 
@@ -60,6 +60,8 @@ development:
 test:
   <<: *default
   database: promax_test
+  username: root
+  password: root
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -83,5 +85,5 @@ test:
 production:
   <<: *default
   database: promax_production
-  username: promax
-  password: <%= ENV['PROMAX_DATABASE_PASSWORD'] %>
+  username: root
+  password: root

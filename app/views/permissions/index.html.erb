@@ -1,0 +1,34 @@
+<h1>Permissions#index</h1>
+
+<table id="permissions" border=2 class="ui celled table">
+	<thead>
+		<th>roll_id</th>
+		<th>modelname</th>
+		<th>permissions</th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</thead>
+	<tbody>
+		<% @permissions.each do |p| %>
+			<tr>
+			<td><%=p.role_id%></td>
+			<td><%=p.modelname%></td>
+			<td><%=p.per_list%></td>
+			<td><%= link_to "view", p %></td>
+			<td><%= link_to "edit", edit_permission_path(p) %></td>
+			<td><%=link_to 'delete', p, method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%></td>
+			</tr>
+		<%end%>
+	</tbody>
+</table>
+
+
+<%= link_to "new_Permission", new_permission_path %>
+
+
+<script>
+	$(document).ready(function(){
+		 $("#permissions").dataTable()
+	});
+</script>

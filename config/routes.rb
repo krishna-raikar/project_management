@@ -1,11 +1,77 @@
 Rails.application.routes.draw do
-  devise_for :users
+  
+  # get 'tasks/index'
+
+  # get 'tasks/new'
+
+  # get 'tasks/edit'
+
+  # get 'tasks/destroy'
+
+  # get 'project_users/index'
+
+  # get 'project_users/show'
+
+  # get 'project_users/edit'
+
+  # get 'project_users/destroy'
+
+  # get 'permissions/index'
+
+  # get 'permissions/show'
+
+  # get 'permissions/new'
+
+  # get 'permissions/edit'
+
+  # get 'roles/index'
+
+  # get 'roles/new'
+
+  # get 'roles/edit'
+
+  # get 'roles/show'
+
+  # get 'issues/index'
+
+  # get 'issues/new'
+
+  # get 'issues/edit'
+
+  # get 'issues/show'
+
+  # get 'projects/index'
+
+  # get 'projects/new'
+
+  # get 'projects/create'
+
+  # get 'projects/edit'
+
+  # get 'projects/update'
+
+  # get 'projects/destroy'
+
+  # get 'projects/show'
+
+  # get 'promax_homes/index'
+
+
+  devise_for :users,path_prefix: 'd'
+  resources :users,only:[:index,:show,:edit,:update,:destroy]
+  
+  resources :projects
+  resources :issues
+  resources :roles
+  resources :permissions
+  resources :project_users
+  resources :tasks
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  root to: "home#index"
+  root to: "promax#index"
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

@@ -1,0 +1,37 @@
+
+
+
+<%= form_for(@project_user) do |f| %>
+  
+  <% if @project_user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@project_user.errors.count, "error") %> prohibited this form from being saved:</h2>
+
+      <ul>
+      <% @project_user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field">
+  	<%=f.label :rolename%>
+  	<%=f.collection_select :role_id,Role.all,:id,:name,{:prompt=>'choose role'}%>
+  </div>
+
+  <div class="field">
+    <%=f.label :user%>
+    <%=f.collection_select :user_id,User.all,:id,:firstname,{:prompt=>'choose user'}%>
+  </div>
+
+  <div class="field">
+    <%=f.label :project%>
+    <%=f.collection_select :project_id,Project.all,:id,:pname,{:prompt=>'choose project'}%>
+  </div>
+
+  
+  <%=f.submit %>
+
+<%end%>

@@ -1,0 +1,52 @@
+
+
+
+<%= form_for(@project) do |f| %>
+  
+  <% if @project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this form from being saved:</h2>
+
+      <ul>
+      <% @project.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field">
+  	<%=f.label :pname%>
+  	<%=f.text_field :pname%>
+  </div>
+
+  <div class="field">
+  	<%=f.label :startdate%>
+  	<%=f.date_select :startdate%>
+  </div>
+
+  <div class="field">
+  	<%=f.label :enddate%>
+  	<%=f.date_select :enddate%>
+  </div>
+
+  <div class="field">
+  	<%=f.label :duedate%>
+  	<%=f.date_select :duedate%>
+  </div>
+
+  <div class="field">
+    <%=f.label :status%>
+    <% status = ['new','In progres','pending','canceled','completed'] %>
+    <%= f.select :status,status.each_with_index.map {|name, index| [name,name]},{:prompt=>"select status"} %>
+  </div>
+
+  <div class="field">
+  	<%=f.label :description%>
+  	<%=f.text_area :description%>
+  </div>
+
+  <%=f.submit %>
+
+<%end%>

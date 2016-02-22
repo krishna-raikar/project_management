@@ -1,0 +1,45 @@
+
+
+
+<%= form_for(@permission) do |f| %>
+  
+  <% if @permission.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@permission.errors.count, "error") %> prohibited this form from being saved:</h2>
+
+      <ul>
+      <% @permission.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field">
+    <%=f.label :role_id%>
+    <%=f.collection_select :role_id,Role.all,:id,:name,{:prompt=>'choose role'}%>
+  </div>
+
+  <div class="field">
+    <%=f.label :modelname%>
+    <% models=['project','task'] %>
+    <%=f.select :modelname,models.map{|k,v| [k,k] },{:prompt=>'choose model'}%>
+  </div>
+
+
+ 
+  
+  <%=f.label 'view' %>    
+  <%=f.check_box :per_list,{multiple: true,:checked=>@permission?false:@permission[:per_list].include?("view") },:view,nil %>
+  <%=f.label 'edit' %>
+  <%=f.check_box :per_list,{multiple: true,:checked=>@permission?false:@permission[:per_list].include?("edit")},:edit,nil %>
+  <%=f.label 'create' %>    
+  <%=f.check_box :per_list,{multiple: true,:checked=>@permission?false:@permission[:per_list].include?("create")},:create,nil %>
+  <%=f.label 'delete' %>
+  <%=f.check_box :per_list,{multiple: true,:checked=>@permission?false:@permission[:per_list].include?("delete")},:delete,nil %>
+
+  
+  <%=f.submit %>
+
+<%end%>

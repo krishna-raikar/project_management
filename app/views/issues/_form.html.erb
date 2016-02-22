@@ -1,0 +1,76 @@
+
+
+
+<%= form_for(@issue) do |f| %>
+  
+  <% if @issue.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@issue.errors.count, "error") %> prohibited this form from being saved:</h2>
+
+      <ul>
+      <% @issue.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field">
+  	<%=f.label :title%>
+  	<%=f.text_field :title%>
+  </div>
+
+  <div class="field">
+  	<%=f.label :description%>
+  	<%=f.text_area :description%>
+  </div>
+  
+  <div class="field">
+    <%=f.label :issue_category%>
+    <% cat = ['bug','feature','support'] %>
+    <%= f.select :issue_category,cat.each_with_index.map {|name, index| [name,name]},{:prompt=>"select category"} %>
+  </div>
+
+  <div class="field">
+  	<%=f.label :priority%>
+  	<% priority = ['urgent','high','medium','low'] %>
+    <%= f.select :priority,priority.each_with_index.map {|name, index| [name,name]},{:prompt=>"select prioriy"} %>
+  </div>
+
+  <div class="field">
+  	<%=f.label :severity%>
+  	<% severity = ['blocker','critical','major','minor','trivial'] %>
+    <%= f.select :severity,severity.each_with_index.map {|name, index| [name,name]},{:prompt=>"select severity"} %>
+  </div>
+
+  <div class="field">
+  	<%=f.label :status%>
+  	<% status = ['new','In progres','pending','canceled','completed'] %>
+    <%= f.select :status,status.each_with_index.map {|name, index| [name,name]},{:prompt=>"select status"} %>
+  </div>
+
+  <div class="field">
+  	<%=f.label :entry_date%>
+  	<%=f.date_select :entry_date%>
+  </div>
+
+  <div class="field">
+    <%=f.label :project_id%>
+    <%=f.collection_select :project_id,Project.all,:id,:pname,{:prompt=>'select projectid'}%>
+  </div>
+
+  <div class="field">
+    <%=f.label :creator_id%>
+    <%=f.text_field :creator_id%>
+  </div>
+
+  <div class="field">
+    <%=f.label :assignee_id%>
+    <%=f.collection_select :assignee_id,User.all,:id,:firstname,{:prompt=>'select projectid'}%>
+  </div>
+  
+
+  <%=f.submit %>
+
+<%end%>

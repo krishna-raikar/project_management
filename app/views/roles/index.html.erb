@@ -1,0 +1,33 @@
+<h1>Roles#index</h1>
+
+<table id="roles" border=2 class="ui celled table">
+	<thead>
+		<th>role_id</th>
+		<th>name</th>
+		<th>description</th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</thead>
+	<tbody>
+		<% @roles.each do |r| %>
+			<tr>
+			<td><%=r.id%></td>
+			<td><%=r.name%></td>
+			<td><%=r.description%></td>
+			<td><%= link_to "view", r %></td>
+			<td><%= link_to "edit", edit_role_path(r) %></td>
+			<td><%=link_to 'delete', r, method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%></td>
+			</tr>
+		<%end%>
+	</tbody>
+</table>
+
+
+<%= link_to "new_role", new_role_path %>
+
+<script>
+	$(document).ready(function(){
+		 $("#roles").dataTable()
+	});
+</script>

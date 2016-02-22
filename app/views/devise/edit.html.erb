@@ -1,0 +1,34 @@
+<%=form_for(@user) do |f|%>
+
+<div class="field">
+    <%= f.label :firstname %><br />
+    <%= f.text_field :firstname, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :lastname %><br />
+    <%= f.text_field :lastname, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :designation %><br />
+    <%= f.select :designation,[['employee','employee'],['manager','manager']],{:prompt=>"select designation"}%>
+</div>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :phone %><br />
+    <%= f.text_field :phone, autofocus: true %>
+  </div>
+  
+ 
+
+  <%=f.submit%>
+<%end%>
+
+<%=link_to 'back',users_path%>

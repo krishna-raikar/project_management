@@ -3,7 +3,7 @@ class CreatePermissions < ActiveRecord::Migration
     create_table :permissions do |t|
       t.integer :role_id,null: false
       t.string :modelname, null:false
-      t.jsonb :permissions, default: '{}'
+      t.jsonb :per_list, default: '{}'
 
       t.timestamps null: false
     end

@@ -1,0 +1,46 @@
+<h1>Tasks#index</h1>
+
+<table id="tasks" border=2 class="ui celled table">
+	<thead>
+		<th>task_id</th>
+		<th>name</th>
+		<th>startdate</th>
+		<th>enddate</th>
+		<th>status</th>
+		<th>description</th>
+		<th>time spent</th>
+		<th>project</th>
+		<th>assigned_to</th>
+		<th>entrydate</th>
+		<th>Actions</th>
+	</thead>
+	<tbody>
+		<% @tasks.each do |t| %>
+			<tr>
+			<td><%=t.id%></td>
+			<td><%=t.name%></td>
+			<td><%=t.startdate%></td>
+			<td><%=t.enddate%></td>
+			<td><%=t.status%></td>
+			<td><%=t.description%></td>
+			<td><%=t.time_spent%></td>
+			<td><%=t.project_id%></td>
+			<td><%=t.user_id%></td>
+			<td><%=t.entry_date%></td>
+			<td><%= link_to "view", t %> | 
+			<%= link_to "edit", edit_task_path(t) %> | 
+			<%=link_to 'delete', t, method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%></td>
+			</tr>
+		<%end%>
+	</tbody>
+</table>
+
+
+<%= link_to "new_task", new_task_path %>
+
+
+<script>
+	$(document).ready(function(){
+		 $("#tasks").dataTable()
+	});
+</script>
