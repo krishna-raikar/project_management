@@ -19,9 +19,16 @@
 			<td><%=p.startdate%></td>
 			<td><%=p.enddate%></td>
 			<td><%=p.status%></td>
-			<td><%= link_to "view", p %></td>
-			<td><%= link_to "edit", edit_project_path(p) %></td>
-			<td><%=link_to 'delete', p, method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%></td>
+
+			<% if can? :view, p%>
+  					<td><%= link_to "view", p %></td>
+			<% end %>
+			<% if can? :edit, p%>
+  					<td><%= link_to "edit", edit_project_path(p) %></td>
+			<% end %>
+			<% if can? :delete, p%>
+  					<td><%=link_to 'delete', p, method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%></td>
+			<% end %>	
 			</tr>
 		<%end%>
 	</tbody>

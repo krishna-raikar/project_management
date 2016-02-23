@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
-
+    # before_filter :load_and_authorize_resource             
+    # load_and_authorize_resource                  #common method to restrict all controller methods
     before_action :set_param, only:[:show,:edit,:view,:destroy,:update]
     def index
       @projects = Project.all
@@ -20,6 +21,7 @@ class ProjectsController < ApplicationController
     end
 
     def edit
+      authorize! :edit, @project
     end
 
     def update
@@ -41,6 +43,7 @@ class ProjectsController < ApplicationController
     end
 
     def show
+       
     end
 
 

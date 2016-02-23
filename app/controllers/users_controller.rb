@@ -1,7 +1,10 @@
 class UsersController<ApplicationController
   before_action :set_param, only:[:show,:edit,:view,:destroy,:update]
     def index
-      @users = User.where.not(id:current_user.id)
+        dontshowid = []
+        dontshowid[0]=User.select('id').find_by(designation:"admin")
+        dontshowid[1]=current_user.id
+        @users = User.where.not(id:dontshowid)
       render 'devise/index'
     end
 

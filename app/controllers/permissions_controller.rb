@@ -16,12 +16,16 @@ class PermissionsController < ApplicationController
       # vals = JSON.parse  s
       # raise s.inspect
       t = permission_param
-       t[:per_list]=s
+      # if Permission.new(t).valid?
+      #   # raise "entered".inspect
+        t[:per_list]=s
+      # end
       return t 
     end
 
 
-    def create    
+    def create 
+
       @permission = Permission.new(arr_to_json)
       if @permission.save
         flash[:notice] = "permission created successfully"
@@ -31,7 +35,7 @@ class PermissionsController < ApplicationController
       end
     end
 
-    def edit
+    def edit  
     end
 
     def update
