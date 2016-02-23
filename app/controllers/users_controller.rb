@@ -1,5 +1,18 @@
 class UsersController<ApplicationController
+  layout :user_layout
+
+  def user_layout
+    if current_user.designation=="admin"
+      "adminportal"
+    else
+      "userportal"
+    end
+  end
+
+
+
   before_action :set_param, only:[:show,:edit,:view,:destroy,:update]
+  
     def index
         dontshowid = []
         dontshowid[0]=User.select('id').find_by(designation:"admin")

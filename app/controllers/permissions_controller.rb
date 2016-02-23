@@ -1,7 +1,21 @@
 class PermissionsController < ApplicationController
+  
   before_action :set_param, only:[:show,:edit,:view,:destroy,:update]
+  layout :user_layout
+  
+  def user_layout
+    if current_user.designation=="admin"
+      "adminportal"
+    else
+      "userportal"
+    end
+  end
+
+
+  
     def index
       @permissions = Permission.all
+      # raise "entered".inspect
     end
 
     def new

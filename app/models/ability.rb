@@ -23,8 +23,12 @@ class Ability
             rec = Permission.where(role_id:u.id)
             # raise rec.inspect
             rec.each do |r|
-              r.per_list.each do |p|  
-                 can [p.to_sym], r.modelname.capitalize.constantize
+              r.per_list.each do |p|
+                 if r.modelname.eql?("all")
+                   can [p.to_sym], :all
+                 else 
+                   can [p.to_sym], r.modelname.capitalize.constantize
+                 end
                   # can p.to_sym, Project
               end
             end  

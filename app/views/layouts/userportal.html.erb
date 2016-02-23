@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Promax</title>
+  <title>userportal</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -21,7 +21,32 @@
 </head>
 <body>
 
-Welcome 
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Promax</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li <%=request.path == '/'? "class=active": ""%>><a href="/">Dashboard</a></li>
+      <li <%=request.path == '/projects'? "class=active": ""%>><a href="/projects">My Projects</a></li>
+       
+      
+      <li <%=request.path == '/tasks'? "class=active": ""%>><a href="/tasks">My Tasks</a></li>
+      
+      <li <%=request.path == '/issues'? "class=active": ""%>><a href="/issues">Issues</a></li>
+      
+      <% if user_signed_in? %>
+      <li><%= link_to "Logout", destroy_user_session_path,method: :delete %></li>
+      <%end%>
+
+    </ul>
+    <% if user_signed_in? %>
+    <div id=logdetails>Logged in as : <%=current_user.email%> | <%=current_user.designation%></div>
+    <%end%>
+  </div>
+</nav>
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
 
 <%= yield %>
 

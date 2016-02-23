@@ -6,9 +6,8 @@
 		<th>project_id</th>
 		<th>user_id</th>
 		<th>role_id</th>
-		<th></th>
-		<th></th>
-		<th></th>
+		<th>Actions</th>
+		
 	</thead>
 	<tbody>
 		<% @project_users.each do |p| %>
@@ -16,9 +15,22 @@
 			<td><%=p[0]%></td>
 			<td><%=p[1]%></td>
 			<td><%=p[2]%></td>
-			<td><%= link_to "view",  project_user_path(p[3]) %></td>
-			<td><%= link_to "edit", edit_project_user_path(p[3]) %></td>
-			<td><%=link_to 'delete', project_user_path(p[3]) , method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%></td>
+			<td>
+
+			<% if can? :view, p%>
+  					<%= link_to "view",  project_user_path(p[3]) %> &nbsp 
+			<% end %>
+			<% if can? :edit, p%>
+  				    <%= link_to "edit", edit_project_user_path(p[3]) %>&nbsp 
+			<% end %>
+			<% if can? :destroy, p%>
+  					 <%=link_to 'delete', project_user_path(p[3]) , method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%>
+			<% end %>
+
+
+			
+
+			</td>
 			</tr>
 		<%end%>
 	</tbody>

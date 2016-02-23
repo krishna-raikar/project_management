@@ -27,9 +27,19 @@
 			<td><%=t.project_id%></td>
 			<td><%=t.user_id%></td>
 			<td><%=t.entry_date%></td>
-			<td><%= link_to "view", t %> | 
-			<%= link_to "edit", edit_task_path(t) %> | 
-			<%=link_to 'delete', t, method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%></td>
+			<td>
+
+			<% if can? :view, p%>
+  					<%= link_to "view", t %> &nbsp 
+			<% end %>
+			<% if can? :edit, p%>
+  				    <%= link_to "edit", edit_task_path(t) %>&nbsp 
+			<% end %>
+			<% if can? :destroy, p%>
+  					 <%=link_to 'delete', t, method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%>
+			<% end %>
+
+			</td>
 			</tr>
 		<%end%>
 	</tbody>

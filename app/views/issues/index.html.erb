@@ -28,9 +28,18 @@
 			<td><%=i.entry_date%></td>
 			<td><%=i.creator_id%></td>
 			<td><%=i.assignee_id%></td>
-			<td><%= link_to "view", i %> | 
-			<%= link_to "edit", edit_issue_path(i) %> | 
-			<%=link_to 'delete', i, method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%></td>
+			<td>
+
+			<% if can? :view, p%>
+  					<%= link_to "view", i %> &nbsp 
+			<% end %>
+			<% if can? :edit, p%>
+  				    <%= link_to "edit", edit_issue_path(i) %>&nbsp 
+			<% end %>
+			<% if can? :destroy, p%>
+  					 <%=link_to 'delete', i, method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%>
+			<% end %>
+			</td>
 			</tr>
 		<%end%>
 	</tbody>

@@ -55,7 +55,14 @@ Rails.application.routes.draw do
   # get 'projects/show'
 
   # get 'promax_homes/index'
+  
+  # unauthenticated :user do
+  #   root "devise/sessions#new"
+  # end
 
+  # authenticated :user do
+  #   root "promax#index"
+  # end
 
   devise_for :users,path_prefix: 'd'
   resources :users,only:[:index,:show,:edit,:update,:destroy]
@@ -71,7 +78,9 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
+  
   root to: "promax#index"
+  # root "promax#index"
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

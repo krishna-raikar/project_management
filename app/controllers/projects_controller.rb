@@ -1,6 +1,17 @@
 class ProjectsController < ApplicationController
     # before_filter :load_and_authorize_resource             
     # load_and_authorize_resource                  #common method to restrict all controller methods
+    layout :user_layout
+
+  def user_layout
+    if current_user.designation=="admin"
+      "adminportal"
+    else
+      "userportal"
+    end
+  end
+
+
     before_action :set_param, only:[:show,:edit,:view,:destroy,:update]
     def index
       @projects = Project.all
@@ -34,6 +45,7 @@ class ProjectsController < ApplicationController
     end
 
     def destroy
+      authorize! :destroy, @project
       if @project.destroy
         flash[:notice] = "project deleted successfully"
         redirect_to projects_path

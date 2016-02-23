@@ -23,7 +23,7 @@
 
   <div class="field">
     <%=f.label :modelname%>
-    <% models=['project','task'] %>
+    <% models=['all','project','task','issue'] %>
     <%=f.select :modelname,models.map{|k,v| [k,k] },{:prompt=>'choose model'}%>
   </div>
 
@@ -31,7 +31,7 @@
   <% view_val = @permission[:per_list].include?("view") unless @permission.nil?%>
   <% edit_val =  @permission[:per_list].include?("edit") unless @permission.nil?%>
   <% create_val =  @permission[:per_list].include?("create") unless @permission.nil?%>
-  <% delete_val =  @permission[:per_list].include?("delete") unless @permission.nil?%>
+  <% delete_val =  @permission[:per_list].include?("destroy") unless @permission.nil?%>
   
   <%=f.label 'view' %>
   <%=f.check_box :per_list,{multiple: true,:checked=>true },:view,nil %>
@@ -40,7 +40,7 @@
   <%=f.label 'create' %>    
   <%=f.check_box :per_list,{multiple: true,:checked=>create_val},:create,nil %>
   <%=f.label 'delete' %>
-  <%=f.check_box :per_list,{multiple: true,:checked=>delete_val},:delete,nil %>
+  <%=f.check_box :per_list,{multiple: true,:checked=>delete_val},:destroy,nil %>
   
 
   

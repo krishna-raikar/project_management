@@ -5,9 +5,7 @@
 		<th>roll_id</th>
 		<th>modelname</th>
 		<th>permissions</th>
-		<th></th>
-		<th></th>
-		<th></th>
+		<th>Actions</th>
 	</thead>
 	<tbody>
 		<% @permissions.each do |p| %>
@@ -15,9 +13,18 @@
 			<td><%=p.role_id%></td>
 			<td><%=p.modelname%></td>
 			<td><%=p.per_list%></td>
-			<td><%= link_to "view", p %></td>
-			<td><%= link_to "edit", edit_permission_path(p) %></td>
-			<td><%=link_to 'delete', p, method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%></td>
+			<td>
+			<% if can? :view, p%>
+  					<%= link_to "view", p %> &nbsp 
+			<% end %>
+			<% if can? :edit, p%>
+  				    <%= link_to "edit", edit_permission_path(p) %>&nbsp 
+			<% end %>
+			<% if can? :destroy, p%>
+  					 <%=link_to 'delete', p, method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%>
+			<% end %>
+
+			</td>
 			</tr>
 		<%end%>
 	</tbody>
