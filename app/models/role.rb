@@ -1,7 +1,6 @@
 class Role < ActiveRecord::Base
 
-	has_many :project_users
-
+    has_many :users
 	has_many :permissions
 
 	validates :name,:presence=>true

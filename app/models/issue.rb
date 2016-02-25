@@ -4,6 +4,9 @@ class Issue < ActiveRecord::Base
 	belongs_to :assigned_issues, :class_name => 'User',foreign_key: "assignee_id"
 	belongs_to :project
 
+	has_one :attachment,as: :attachable
+	accepts_nested_attributes_for :attachment 
+
 	validates :title,:description,:priority,:severity,:status,:issue_category,:entry_date,:project_id,:creator_id,:presence => true
 	validates :title,format: {with: /\A[a-zA-Z]{2,20}\Z/}, :unless => Proc.new{|f| f.blank?}
 	validate :entry_date_check

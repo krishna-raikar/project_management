@@ -1,10 +1,10 @@
 class RolesController < ApplicationController
 
-
+  load_and_authorize_resource :only => [:edit, :show,:destroy] 
   layout :user_layout
 
   def user_layout
-    if current_user.designation=="admin"
+    if current_user.role.name=="admin"
       "adminportal"
     else
       "userportal"
@@ -14,7 +14,7 @@ class RolesController < ApplicationController
   
    before_action :set_param, only:[:show,:edit,:view,:destroy,:update]
     def index
-      @roles = Role.all
+      @roles = Role.where.not(name:"admin")
     end
 
     def new

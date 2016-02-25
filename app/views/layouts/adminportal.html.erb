@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>admin</title>
+  <title>Admin Portal</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -17,38 +17,85 @@
    <script type="text/javascript" src="https://cdn.datatables.net/1.10.11/js/dataTables.semanticui.min.js"></script>
    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.min.js"></script>
    
+
+   <!-- jQuery -->
+    <script src="assets/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="assets/js/bootstrap.min.js"></script>
+
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Promax</a>
+<div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+
+                <li class="sidebar-brand">
+                    <a href="#">
+                        PromAX
+                    </a>
+                </li>
+                <li <%=request.path == '/'? "class=active": ""%>><a href="/">Dashboard</a></li>
+                <li <%=request.path == '/projects'? "class=active": ""%>><a href="/projects">Projects</a></li>
+                <li <%=request.path == '/project_users'? "class=active": ""%>><a href="/project_users">Project Assignment</a></li>
+                <li <%=request.path == '/users'? "class=active": ""%>><a href="/users">Employees</a></li>
+                <li <%=request.path == '/tasks'? "class=active": ""%>><a href="/tasks">Tasks</a></li>
+                <li <%=request.path == '/permissions'? "class=active": ""%>><a href="/permissions">Permissions</a></li>
+                <li <%=request.path == '/issues'? "class=active": ""%>><a href="/issues">Issues</a></li>
+                <li <%=request.path == '/attachments'? "class=active": ""%>><a href="#">Attachments</a></li>
+                <li><%= link_to "Account settings",edit_user_registration_path(current_user.id)%></li>
+                <% if user_signed_in? %>
+                <li><%= link_to "Logout", destroy_user_session_path,method: :delete %></li>
+                <%end%>
+            </ul>
+        </div>
+
+        
+
+
+
+
+
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle view</a>
+
+                        <p class="notice"><%= notice %></p>
+                        <p class="alert"><%= alert %></p>
+
+                        <%= yield %>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
     </div>
-    <ul class="nav navbar-nav">
-      <li <%=request.path == '/'? "class=active": ""%>><a href="/">Dashboard</a></li>
-      <li <%=request.path == '/projects'? "class=active": ""%>><a href="/projects">Projects</a></li>
-       <li <%=request.path == '/project_users'? "class=active": ""%>><a href="/project_users">Project Assignment</a></li>
-      <li <%=request.path == '/users'? "class=active": ""%>><a href="/users">Employees</a></li>
-      <li <%=request.path == '/tasks'? "class=active": ""%>><a href="/tasks">Tasks</a></li>
-      <li <%=request.path == '/permissions'? "class=active": ""%>><a href="/permissions">Permissions</a></li>
-      <li <%=request.path == '/issues'? "class=active": ""%>><a href="/issues">Issues</a></li>
-      <li <%=request.path == '/attachments'? "class=active": ""%>><a href="#">Attachments</a></li>
-      <% if user_signed_in? %>
-      <li><%= link_to "Logout", destroy_user_session_path,method: :delete %></li>
-      <%end%>
+    <!-- /#wrapper -->
 
-    </ul>
-    <% if user_signed_in? %>
-    <div id=logdetails>Logged in as : <%=current_user.email%> | <%=current_user.designation%></div>
-    <%end%>
-  </div>
-</nav>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+    
 
-<%= yield %>
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+
+
+
 
 </body>
 </html>

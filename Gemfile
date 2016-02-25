@@ -25,9 +25,23 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'devise'
 
-#used gem by me
+
+
+#gems used  by me
 gem 'jquery-datatables-rails', '~> 1.12.2'
+
 gem 'cancancan', '~> 1.10'
+
+gem 'carrierwave'
+
+gem 'mini_magick'
+
+gem 'bootstrap-sass', '~> 2.3.2'
+
+
+
+
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -5,7 +5,7 @@ class PromaxController < ApplicationController
 
 
   def index
-  	a=current_user.designation
+  	a=current_user.role.name
   	if a.eql?("admin")
   		render :layout => 'adminportal'
   	else

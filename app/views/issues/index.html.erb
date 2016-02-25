@@ -30,13 +30,13 @@
 			<td><%=i.assignee_id%></td>
 			<td>
 
-			<% if can? :view, p%>
+			<% if can? :show, i%>
   					<%= link_to "view", i %> &nbsp 
 			<% end %>
-			<% if can? :edit, p%>
+			<% if can? :edit, i%>
   				    <%= link_to "edit", edit_issue_path(i) %>&nbsp 
 			<% end %>
-			<% if can? :destroy, p%>
+			<% if can? :destroy, i%>
   					 <%=link_to 'delete', i, method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%>
 			<% end %>
 			</td>

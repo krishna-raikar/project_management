@@ -6,20 +6,30 @@
 		<th>Name</th>
 		<th>phone</th>
 		<th>email</th>
-		<th>designation</th>
+		<th>role_id</th>
 		<th>Actions</th>
 	</thead>
 	<tbody>
 		<% @users.each do |u| %>
 			<tr>
 			<td><%=u.id%></td>
-			<td><%=u.firstname%><%=u.lastname%></td>
+			<td><%=u.firstname%>&nbsp<%=u.lastname%></td>
 			<td><%=u.phone%></td>
 			<td><%=u.email%></td>
-			<td><%=u.designation%></td>
-			<td><%= link_to "view",u%> | 
-			<%= link_to "edit", edit_user_path(u) %> | 
-			<%= link_to 'delete',u,method: :delete,data:{confirm:'Do u want to delete record?'}%></td>
+			<td><%=u.role_id%></td>
+			<td>
+
+			<% if can? :show, u%>
+  					<%= link_to "view",u%>  &nbsp 
+			<% end %>
+			<% if can? :edit, u%>
+  				    <%= link_to "edit", edit_user_path(u) %>&nbsp 
+			<% end %>
+			<% if can? :destroy, u%>
+  					 <%= link_to 'delete',u,method: :delete,data:{confirm:'Do u want to delete record?'}%>
+			<% end %>	
+
+			</td>
 			</tr>
 		<%end%>
 	</tbody>

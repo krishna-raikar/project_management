@@ -1,5 +1,33 @@
 Rails.application.routes.draw do
   
+  # get 'attachments/index'
+
+  # get 'attachments/new'
+
+  # get 'attachments/show'
+
+  # get 'attachments/edit'
+
+  # get 'attachment/index'
+
+  # get 'attachment/show'
+
+  # get 'attachment/edit'
+
+  # get 'attachment/new'
+
+  get 'errors/not_found'
+
+  get 'errors/internal_server_error'
+
+  get 'errors/unauth_access'
+
+
+  #for showing dynamic error messages
+  get "/404" => "errors#not_found"
+  get "/401" => "errors#unauth_access"
+  get "/500" => "errors#internal_server_error"
+
   # get 'tasks/index'
 
   # get 'tasks/new'
@@ -73,6 +101,7 @@ Rails.application.routes.draw do
   resources :permissions
   resources :project_users
   resources :tasks
+  resources :attachments
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

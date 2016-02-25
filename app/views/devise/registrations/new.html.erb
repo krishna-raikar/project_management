@@ -16,7 +16,7 @@
 
   <div class="field">
     <%= f.label :type_of_user %><br />
-    <%= f.select :designation,[['employee','employee'],['manager','manager']],{:prompt=>"select designation"}%>
+    <%= f.collection_select :role_id,Role.all,:id,:name,{:prompt=>"what type of user are you?"}%>
 </div>
   </div>
 

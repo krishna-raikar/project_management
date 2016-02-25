@@ -22,5 +22,21 @@ module Promax
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    config.exceptions_app = self.routes
+
+    
+    
+    config.to_prepare do
+        # Devise::SessionsController.layout lname
+         Devise::RegistrationsController.layout proc{ |controller|
+            if user_signed_in? 
+            current_user.role.name=="admin" ? "adminportal" : "userportal"
+            end 
+        }
+        # Devise::ConfirmationsController.layout lname
+        # Devise::UnlocksController.layout lname
+        # Devise::PasswordsController.layout lname
+    end
   end
+
 end

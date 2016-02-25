@@ -5,9 +5,7 @@
 		<th>role_id</th>
 		<th>name</th>
 		<th>description</th>
-		<th></th>
-		<th></th>
-		<th></th>
+		<th>Actions</th>
 	</thead>
 	<tbody>
 		<% @roles.each do |r| %>
@@ -17,7 +15,7 @@
 			<td><%=r.description%></td>
 			<td>
 
-			<% if can? :view, p%>
+			<% if can? :show, p%>
   					<%= link_to "view", r %> &nbsp 
 			<% end %>
 			<% if can? :edit, p%>

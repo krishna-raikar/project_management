@@ -3,9 +3,8 @@
 
 <table id="project_users" border=2 class="ui celled table">
 	<thead>
-		<th>project_id</th>
-		<th>user_id</th>
-		<th>role_id</th>
+		<th>project</th>
+		<th>user</th>
 		<th>Actions</th>
 		
 	</thead>
@@ -14,17 +13,16 @@
 			<tr>
 			<td><%=p[0]%></td>
 			<td><%=p[1]%></td>
-			<td><%=p[2]%></td>
 			<td>
 
-			<% if can? :view, p%>
-  					<%= link_to "view",  project_user_path(p[3]) %> &nbsp 
+			<% if can? :show, p%>
+  					<%= link_to "view",  project_user_path(p[2]) %> &nbsp 
 			<% end %>
 			<% if can? :edit, p%>
-  				    <%= link_to "edit", edit_project_user_path(p[3]) %>&nbsp 
+  				    <%= link_to "edit", edit_project_user_path(p[2]) %>&nbsp 
 			<% end %>
 			<% if can? :destroy, p%>
-  					 <%=link_to 'delete', project_user_path(p[3]) , method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%>
+  					 <%=link_to 'delete', project_user_path(p[2]) , method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%>
 			<% end %>
 
 

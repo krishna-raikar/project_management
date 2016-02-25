@@ -1,10 +1,10 @@
 class ProjectUsersController < ApplicationController
   
-
+  load_and_authorize_resource :only => [:edit, :show,:destroy] 
   layout :user_layout
 
   def user_layout
-    if current_user.designation=="admin"
+    if current_user.role.name=="admin"
       "adminportal"
     else
       "userportal"
@@ -15,7 +15,7 @@ class ProjectUsersController < ApplicationController
   before_action :set_param, only:[:show,:edit,:view,:destroy,:update]
     def index
       # @project_users = ProjectUser.all
-      @project_users = ProjectUser.joins(:project).joins(:user).joins(:role).pluck("projects.pname","users.firstname","roles.name","project_users.id")
+      @project_users = ProjectUser.joins(:project).joins(:user).pluck("projects.pname","users.firstname","project_users.id")
     end
 
     def new
@@ -62,7 +62,7 @@ class ProjectUsersController < ApplicationController
     end
 
     def project_user_param
-      params.require(:project_user).permit(:role_id,:project_id,:user_id )
+      params.require(:project_user).permit(:project_id,:user_id )
     end
 
 end

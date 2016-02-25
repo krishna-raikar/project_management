@@ -67,8 +67,20 @@
 
   <div class="field">
     <%=f.label :assignee_id%>
-    <%=f.collection_select :assignee_id,User.all,:id,:firstname,{:prompt=>'select projectid'}%>
+    <%=f.collection_select :assignee_id,User.where.not(id:Role.find_by(name:"admin")),:id,:firstname,{:prompt=>'select projectid'}%>
   </div>
+
+  <%= f.fields_for :attachment_attributes,@attachment do |at|%>
+    <div class="field">
+      <%=at.label :attachment%>
+      <%=at.file_field :file%>
+    </div>
+    
+    <div class="field">
+      <%=at.label :attachment_description%>
+      <%=at.text_area :description%>
+    </div>
+  <% end %>
   
 
   <%=f.submit %>

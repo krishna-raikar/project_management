@@ -1,8 +1,10 @@
 class TasksController < ApplicationController
+
+  load_and_authorize_resource :only => [:edit, :show,:destroy] 
   layout :user_layout
 
   def user_layout
-    if current_user.designation=="admin"
+    if current_user.role.name=="admin"
       "adminportal"
     else
       "userportal"

@@ -14,7 +14,7 @@
 			<td><%=p.modelname%></td>
 			<td><%=p.per_list%></td>
 			<td>
-			<% if can? :view, p%>
+			<% if can? :show, p%>
   					<%= link_to "view", p %> &nbsp 
 			<% end %>
 			<% if can? :edit, p%>

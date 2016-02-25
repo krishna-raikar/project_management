@@ -1,9 +1,9 @@
 class IssuesController < ApplicationController
-  
+  load_and_authorize_resource :only => [:edit, :show,:destroy] 
   layout :user_layout
   
   def user_layout
-    if current_user.designation=="admin"
+    if current_user.role.name=="admin"
       "adminportal"
     else
       "userportal"
@@ -21,6 +21,7 @@ class IssuesController < ApplicationController
   end
 
   def create
+    
     @issue = Issue.new(issue_param)
     if @issue.save
       flash[:notice] = "issue created successfully"
@@ -60,6 +61,6 @@ class IssuesController < ApplicationController
   end
 
   def issue_param
-    params.require(:issue).permit(:title,:issue_category,:description,:priority,:severity,:status,:entry_date,:project_id,:creator_id,:assignee_id )
+    params.require(:issue).permit(:title,:issue_category,:description,:priority,:severity,:status,:entry_date,:project_id,:creator_id,:assignee_id,attachment_attributes: [:file,:description] )
   end
 end

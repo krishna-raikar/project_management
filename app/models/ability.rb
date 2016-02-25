@@ -4,22 +4,22 @@ class Ability
   def initialize(user)
     # Define abilities for the passed in user here. For example:
     #
-      # user ||= User.new # guest user (not logged in)
-      #  # raise user.inspect
-      # if user.designation=="admin"
+      user ||= User.new # guest user (not logged in)
+       # raise user.inspect
+      # if user.role.name=="admin"
       #   can :manage, :all
-      # elsif user.designation=="employee"
-      #   val = ["view","edit"]
-      #   val.each do |v|
-      #     pro = "project"
-      #     can v.to_sym, pro.capitalize.constantize
-      #   end 
+      # elsif user.role.name=="employee"
+      #   # val = ["view"]
+      #   # val.each do |v|
+      #     # pro = "project"
+      #     can :show, Project
+      #   # end 
       #   # can [:view,:edit], Project
       # end
      
       arr = Role.all
       arr.each do |u|
-        if user.designation.eql?(u.name)
+        if user.role.name.eql?(u.name)
             rec = Permission.where(role_id:u.id)
             # raise rec.inspect
             rec.each do |r|

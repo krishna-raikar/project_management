@@ -1,6 +1,20 @@
-<%=form_for(@user) do |f|%>
+<h2>Edit</h2>
 
-<div class="field">
+<%= form_for(@user) do |f| %>
+
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this form from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
     <%= f.label :firstname %><br />
     <%= f.text_field :firstname, autofocus: true %>
   </div>
@@ -10,25 +24,35 @@
     <%= f.text_field :lastname, autofocus: true %>
   </div>
 
+  <% if current_user.role.name!="admin"%>
   <div class="field">
-    <%= f.label :designation %><br />
-    <%= f.select :designation,[['employee','employee'],['manager','manager']],{:prompt=>"select designation"}%>
-</div>
+    <%= f.label :type_of_user %><br />
+    <%= f.select :role_id,[['employee','employee'],['manager','manager']],{:prompt=>"select role_id"}%>
   </div>
+  <%end%>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email, autofocus: true %>
-  </div>
 
   <div class="field">
     <%= f.label :phone %><br />
     <%= f.text_field :phone, autofocus: true %>
   </div>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+
   
- 
 
-  <%=f.submit%>
-<%end%>
+  
 
-<%=link_to 'back',users_path%>
+  <div class="actions">
+    <%= f.submit "Update" %>
+  </div>
+<% end %>
+
+
+
+<%= link_to "Back", :back %>
+
+

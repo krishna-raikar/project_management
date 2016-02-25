@@ -12,14 +12,30 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
   	devise_parameter_sanitizer.for(:sign_up) do |u|
-  		u.permit(:firstname,:lastname,:email,:password,:designation,:phone,:password_confirmation, :remember_me)
+  		u.permit(:firstname,:lastname,:email,:password,:role_id,:phone,:password_confirmation, :remember_me)
   	end
 
   	devise_parameter_sanitizer.for(:account_update) do |u|
-  		u.permit(:firstname,:lastname,:email,:password,:designation,:phone,:password_confirmation, :remember_me)
+  		u.permit(:firstname,:lastname,:email,:password,:role_id,:phone,:password_confirmation, :remember_me,:current_password)
   	end
   end
 
 
+
+   # rescue_from ActiveRecord::RecordNotFound,
+   #              ActionController::RoutingError,
+   #              ActionController::UnknownController,
+   #              # ActionController::UnknownAction,
+   #              ActionController::MethodNotAllowed do |exception|
+
+   #    # Put loggers here, if desired.
+
+   #    render(:status => 404)
+   #  end
+  
+  #for handling exception occured from cancancan
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to "/"+params[:controller] , :alert => exception.message
+  end
 
 end

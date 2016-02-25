@@ -1,10 +1,11 @@
 class ProjectsController < ApplicationController
-    # before_filter :load_and_authorize_resource             
+    # before_filter :load_and_authorize_resource 
+    load_and_authorize_resource :only => [:edit, :show,:destroy]            
     # load_and_authorize_resource                  #common method to restrict all controller methods
     layout :user_layout
 
   def user_layout
-    if current_user.designation=="admin"
+    if current_user.role.name=="admin"
       "adminportal"
     else
       "userportal"
@@ -32,7 +33,7 @@ class ProjectsController < ApplicationController
     end
 
     def edit
-      authorize! :edit, @project
+      # authorize! :edit, @project
     end
 
     def update
@@ -45,7 +46,7 @@ class ProjectsController < ApplicationController
     end
 
     def destroy
-      authorize! :destroy, @project
+      # authorize! :destroy, @project
       if @project.destroy
         flash[:notice] = "project deleted successfully"
         redirect_to projects_path
@@ -55,7 +56,8 @@ class ProjectsController < ApplicationController
     end
 
     def show
-       
+      @project = Project.find(params[:id])
+       # authorize! :view, @project
     end
 
 

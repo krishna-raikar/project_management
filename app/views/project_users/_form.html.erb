@@ -17,11 +17,6 @@
 
 
   <div class="field">
-  	<%=f.label :rolename%>
-  	<%=f.collection_select :role_id,Role.all,:id,:name,{:prompt=>'choose role'}%>
-  </div>
-
-  <div class="field">
     <%=f.label :user%>
     <%=f.collection_select :user_id,User.all,:id,:firstname,{:prompt=>'choose user'}%>
   </div>

@@ -1,8 +1,9 @@
 class UsersController<ApplicationController
+  load_and_authorize_resource :only => [:edit, :show,:destroy] 
   layout :user_layout
 
   def user_layout
-    if current_user.designation=="admin"
+    if current_user.role.name=="admin"
       "adminportal"
     else
       "userportal"
@@ -15,7 +16,7 @@ class UsersController<ApplicationController
   
     def index
         dontshowid = []
-        dontshowid[0]=User.select('id').find_by(designation:"admin")
+        dontshowid[0]=User.select('id').find_by(role_id:Role.find_by(name:"admin"))
         dontshowid[1]=current_user.id
         @users = User.where.not(id:dontshowid)
       render 'devise/index'
@@ -67,7 +68,7 @@ class UsersController<ApplicationController
     end
 
     def user_param
-      params.require(:user).permit(:firstname,:lastname,:phone,:email,:designation)
+      params.require(:user).permit(:firstname,:lastname,:phone,:email,:role_id)
     end
 
 end

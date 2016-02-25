@@ -1,10 +1,10 @@
 class PermissionsController < ApplicationController
-  
+  load_and_authorize_resource :only => [:edit, :show,:destroy] 
   before_action :set_param, only:[:show,:edit,:view,:destroy,:update]
   layout :user_layout
   
   def user_layout
-    if current_user.designation=="admin"
+    if current_user.role.name=="admin"
       "adminportal"
     else
       "userportal"
@@ -14,7 +14,8 @@ class PermissionsController < ApplicationController
 
   
     def index
-      @permissions = Permission.all
+      admin_per_id = Role.where(name:"admin").pluck(:id) 
+      @permissions = Permission.where.not(role_id:admin_per_id)
       # raise "entered".inspect
     end
 
