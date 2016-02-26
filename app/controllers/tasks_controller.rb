@@ -15,7 +15,12 @@ class TasksController < ApplicationController
   
   before_action :set_param, only:[:show,:edit,:view,:destroy,:update]
     def index
-      @tasks = Task.all
+    
+      if current_user.role.name!="admin"
+        @tasks = current_user.assigned_issues
+      else
+        @tasks = Task.all
+      end
     end
 
     def new

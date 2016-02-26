@@ -4,6 +4,7 @@ class Project < ActiveRecord::Base
     
     has_many :project_users
     has_many :users, through: :project_users
+    # has_and_belongs_to_many :users
 
     has_many :issues
     has_many :users,through: :issues

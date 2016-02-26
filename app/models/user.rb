@@ -7,12 +7,13 @@ class User < ActiveRecord::Base
   belongs_to :role
   has_many :tasks
 
+  # has_and_belongs_to_many :projects
   has_many :project_users
   has_many :projects, through: :project_users
 
   has_many :own_issues,:class_name=>'Issue',foreign_key: :creator_id
   has_many :assigned_issues,:class_name=>'Issue',foreign_key: :assignee_id
-  has_many :projects,through: :issues
+  # has_many :projects,through: :issues
   
 
   validates_uniqueness_of :email

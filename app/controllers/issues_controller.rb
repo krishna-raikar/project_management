@@ -12,8 +12,35 @@ class IssuesController < ApplicationController
 
 
   before_action :set_param, only:[:show,:edit,:view,:destroy,:update]
+
+
+  def view_filter
+    # raise "e".inspect
+    # puts Issue.last.to_json
+    # render :json=> Issue.last
+    # render :partial => 'table', :collection => @issues
+    redirect_to :issues
+  end
+
+
   def index
-    @issues = Issue.all
+    a=request.query_parameters
+    #if true show ownedissues otherwise assigned issues
+    if current_user.role.name!="admin"
+      # raise "e".inspect
+
+      if a[:view_flag].eql?("true")
+        puts "true"
+        @issues = current_user.own_issues
+      else
+        puts "false"
+        @issues = current_user.assigned_issues
+      end  
+    else
+      @issues = Issue.all
+    end
+     # render partial: "hello"
+     # render :partial => 'table', :collection => 
   end
 
   def new

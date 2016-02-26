@@ -1,5 +1,7 @@
 class AttachmentsController < ApplicationController
   load_and_authorize_resource :only => [:edit, :show,:destroy] 
+  before_save :check_data
+
   layout :user_layout
 
   def user_layout
@@ -11,13 +13,14 @@ class AttachmentsController < ApplicationController
   end
 
   def index
-  	@attachment = Attachment.all
+  	@attachments = Attachment.all
   end
 
   def show
   end
 
   def create
+    raise "entered".inspect
   	@attachment = Attachment.new(attachment_param)
   	@attachment.save!
   end
@@ -25,6 +28,11 @@ class AttachmentsController < ApplicationController
   def edit
   end
 
+
+  def destroy
+    @attachment.delete
+    redirect_to :attachments
+  end
   def new
   	@attachment = Attachment.new
   end
@@ -35,5 +43,10 @@ class AttachmentsController < ApplicationController
 
     def attachment_param
       params.require(:attachment).permit(:file,:description)
+    end
+
+
+    def check_data
+      raise "e".inspect
     end
 end

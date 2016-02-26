@@ -92,6 +92,8 @@ Rails.application.routes.draw do
   #   root "promax#index"
   # end
 
+  get "/issues/view" => "issues#view_filter"
+
   devise_for :users,path_prefix: 'd'
   resources :users,only:[:index,:show,:edit,:update,:destroy]
   
@@ -101,7 +103,7 @@ Rails.application.routes.draw do
   resources :permissions
   resources :project_users
   resources :tasks
-  resources :attachments
+  resources :attachments,except: [:new]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

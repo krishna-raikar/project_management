@@ -15,7 +15,15 @@ class ProjectsController < ApplicationController
 
     before_action :set_param, only:[:show,:edit,:view,:destroy,:update]
     def index
-      @projects = Project.all
+      
+      if current_user.role.name!="admin"
+        @projects = current_user.projects      
+        # render template:@projects
+      else
+        @projects = Project.all
+        # render template:@projects
+      end
+
     end
 
     def new
