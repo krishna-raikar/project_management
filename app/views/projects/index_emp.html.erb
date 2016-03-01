@@ -1,0 +1,39 @@
+
+
+<div class="hstyle">PROJECTS</div>
+<div class="col-lg-4 col-lg-offset-2 well">
+<table id="projects"  class="table table-hover ">
+	<thead>
+		<th>name</th>
+		<th>action</th>
+	</thead>
+	<tbody>
+		<% @projects.each do |p| %>
+			<tr>
+			<td><%=p.pname%></td>
+            <td>
+			  <% if can? :show, p%>
+  					<%= link_to "view", p %> &nbsp 
+			<% end %>
+			<% if can? :edit, p%>
+  				    <%= link_to "edit", edit_project_path(p) %>&nbsp 
+			<% end %>
+			<% if can? :destroy, p%>
+  					 <%=link_to 'delete', p, method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%>
+			<% end %>
+			</td>	
+			</tr>
+		<%end%>
+	</tbody>
+</table>
+
+
+<%= link_to "new_Project", new_project_path %>
+</div>
+
+
+
+
+
+
+

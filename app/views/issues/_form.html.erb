@@ -1,7 +1,7 @@
 
 
 
-<%= form_for(@issue) do |f| %>
+<%= form_for [@cur_proj,@issue] do |f| %>
   
   <% if @issue.errors.any? %>
     <div id="error_explanation">

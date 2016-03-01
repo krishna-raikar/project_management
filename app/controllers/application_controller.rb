@@ -7,7 +7,22 @@ class ApplicationController < ActionController::Base
   
   protect_from_forgery with: :exception
 
-  before_action :authenticate_user!
+  before_action :auth_user,:except=>[:welcome]
+
+  def auth_user
+    if self.controller_name.eql?("promax")
+      # raise "e".inspect
+        return
+    else 
+        authenticate_user!
+    end
+  end
+  
+
+  def after_sign_in_path_for(resource_or_scope)
+     "/promax"
+  end
+
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def configure_permitted_parameters

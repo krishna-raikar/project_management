@@ -6,7 +6,18 @@ class UsersController<ApplicationController
     if current_user.role.name=="admin"
       "adminportal"
     else
-      "userportal"
+
+      # a= request.path
+      # a = a.slice(1...a.length)
+      # # a="a/b/c/d"
+      # # raise a.inspect
+      # q= a.slice(0...(a.index('/')))
+      # # raise q.inspect
+      # unless q.eql?("users")
+      #   "userportal"
+      # else
+        "userportal"
+      # end
     end
   end
 
@@ -37,6 +48,7 @@ class UsersController<ApplicationController
     # end
 
     def edit
+      raise "e".inspect
     	render 'devise/edit'
     end
 
@@ -54,7 +66,7 @@ class UsersController<ApplicationController
         flash[:notice] = "user deleted successfully"
         redirect_to users_path
       else
-        render 'devise/index'
+        render 'devise/index',:layout=>"user_firsthome"
       end
     end
 

@@ -1,7 +1,7 @@
 
 
 
-<%= form_for(@task) do |f| %>
+<%= form_for [@cur_proj,@task] do |f| %>
   
   <% if @task.errors.any? %>
     <div id="error_explanation">
@@ -48,14 +48,27 @@
 
   <div class="field">
     <%=f.label :assign_to%>
-    <%=f.collection_select :user_id,User.all,:id,:firstname,{:prompt=>'choose user'}%>
+    <%=f.collection_select :user_id,User.where(role_id:Role.select("id").find_by(name:"employee")),:id,:firstname,{:prompt=>'choose user'}%>
   </div>
 
   <div class="field">
-    <%=f.label :entrydate%>
+    <%=f.label :entry_date%>
     <%=f.date_select :entry_date%>
   </div>
 
   <%=f.submit %>
 
 <%end%>
+
+
+
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    // $('#task_startdate').datepicker();
+    // $('#task_enddate').datepicker();
+    // $('#entrydate').datepicker();
+
+  });
+</script>

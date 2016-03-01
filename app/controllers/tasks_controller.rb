@@ -14,8 +14,14 @@ class TasksController < ApplicationController
 
   
   before_action :set_param, only:[:show,:edit,:view,:destroy,:update]
+  before_action :set_proj
+
+  def set_proj
+    @cur_proj = Project.find(params[:project_id])
+  end
+
     def index
-    
+      
       if current_user.role.name!="admin"
         @tasks = current_user.assigned_issues
       else
@@ -31,7 +37,7 @@ class TasksController < ApplicationController
       @task = Task.new(task_param)
       if @task.save
         flash[:notice] = "task created successfully"
-        redirect_to tasks_path
+        redirect_to project_tasks_path
       else
         render 'new'
       end
@@ -43,7 +49,7 @@ class TasksController < ApplicationController
     def update
        if @task.update(task_param)
         flash[:notice] = "task updated successfully"
-        redirect_to tasks_path
+        redirect_to project_tasks_path
       else
         render 'edit'
       end
@@ -52,7 +58,7 @@ class TasksController < ApplicationController
     def destroy
       if @task.destroy
         flash[:notice] = "task deleted successfully"
-        redirect_to tasks_path
+        redirect_to project_tasks_path
       else
         render 'index'
       end

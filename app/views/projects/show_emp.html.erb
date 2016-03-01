@@ -1,0 +1,46 @@
+
+<div class="hstyle">Projects Details</div>
+<div class="row">
+<div class="col-lg-12">
+	
+	<table id="proj_det_tb" class="table">
+	<tr>
+	<td>name :<%=@project.pname%></td>
+	
+	<td>start_date : <%=@project.startdate%></td>
+	
+	<td>end_date : <%=@project.enddate%></td>
+	
+	<td>due_date : <%=@project.duedate%></td>	
+	
+	<td>status : <%=@project.status%></td>
+
+	
+	<td>description : <%=@project.description%></td>
+	</tr>
+	</table>
+</div>
+</div>
+<br>
+
+
+
+<ul class = "pager">
+   <li class = "previous"><a href = <%=projects_path%>>&larr; back</a></li>
+</ul>
+
+<%  
+  if controller.controller_name.eql?("projects")
+     @proj = Project.find_by(id:params[:id])
+  else
+     @proj = Project.find_by(id:params[:project_id])
+  end    
+%>
+<br><br>
+
+
+<%= link_to "PROJECT TASKS", project_tasks_path(@proj),:class=>"btn btn-default btn-success" %>
+
+<%= link_to "PROJECT ISSUES", project_issues_path(@proj),:class=>"btn btn-default btn-success" %>
+
+<%= link_to "PROJECT ATTACHMENTS", project_attachments_path(@proj),:class=>"btn btn-default btn-success" %>

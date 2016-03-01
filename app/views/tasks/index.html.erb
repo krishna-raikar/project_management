@@ -1,4 +1,4 @@
-<h1>Tasks#index</h1>
+<div class="hstyle">Tasks</div>
 
 
 <table id="tasks" border=2 class="ui celled table">
@@ -31,13 +31,13 @@
 			<td>
 
 			<% if can? :show, p%>
-  					<%= link_to "view", t %> &nbsp 
+  					<%= link_to "view", [@cur_proj,t] %> &nbsp 
 			<% end %>
 			<% if can? :edit, p%>
-  				    <%= link_to "edit", edit_task_path(t) %>&nbsp 
+  				    <%= link_to "edit", edit_project_task_path(@cur_proj,t) %>&nbsp 
 			<% end %>
 			<% if can? :destroy, p%>
-  					 <%=link_to 'delete', t, method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%>
+  					 <%=link_to 'delete', [@cur_proj,t], method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%>
 			<% end %>
 
 			</td>
@@ -47,7 +47,7 @@
 </table>
 
 
-<%= link_to "new_task", new_task_path %>
+<%= link_to "new_task", new_project_task_path %>
 
 
 <script>

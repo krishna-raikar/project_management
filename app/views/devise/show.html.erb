@@ -1,11 +1,36 @@
 
 
-<h2>#users show</h2>
 
-id : <%=@user.id%><br>
-name : <%=@user.firstname%><%=@user.lastname%><br>
-phone : <%=@user.phone%><br>
-email : <%=@user.email%><br>
-role_id : <%=@user.role_id%><br>
+
+<div class="hstyle">Account Details</div>
+
+<table id="user-show-tb"  class="table">
+	<thead>
+		
+		
+	</thead>
+	<tbody>
+			<tr>
+			<td>User-ID</td><td><%=@user.id%></td>
+			</tr>
+			<tr>
+				<td>name</td>
+				<td><%=@user.firstname%><%=@user.lastname%></td>
+			</tr>
+			<tr>
+				<td>phone</td>
+				<td><%=@user.phone%></td>
+			</tr>
+			<tr>
+				<td>Email-ID</td>
+				<td><%=@user.email%></td>
+			</tr>
+			<tr>
+				<td>role</td>
+				<td><%=@user.role.name%></td>
+			</tr>
+		
+	</tbody>
+</table>
 
 <%=link_to 'back',users_path%>

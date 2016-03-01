@@ -1,5 +1,5 @@
 
-<h2>#Projects</h2>
+<div class="hstyle">PROJECTS</div>
 <table id="projects" border=2 class="ui celled table">
 	<thead>
 		<th>project_id</th>
@@ -34,7 +34,15 @@
 </table>
 
 
-<%= link_to "new_Project", new_project_path %>
+<br><br>
+
+  					<%= link_to "NEW PROJECT", new_project_path,:class=>"btn btn-default btn-success" %>
+
+
+
+
+
+
 
 
 <script>
@@ -42,3 +50,7 @@
 		 $("#projects").dataTable()
 	});
 </script>
+
+
+
+

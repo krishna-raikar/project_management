@@ -1,4 +1,8 @@
-<h2>Edit</h2>
+
+<div class="col-lg-4 col-lg-offset-4">  
+<div class=" panel panel-primary">
+<div class="panel-heading">Edit form</div>
+<div class="panel-body">
 
 <%= form_for(@user) do |f| %>
 
@@ -16,30 +20,30 @@
 
   <div class="field">
     <%= f.label :firstname %><br />
-    <%= f.text_field :firstname, autofocus: true %>
+    <%= f.text_field :firstname, autofocus: true,:class=>"form-control" %>
   </div>
 
   <div class="field">
     <%= f.label :lastname %><br />
-    <%= f.text_field :lastname, autofocus: true %>
+    <%= f.text_field :lastname, autofocus: true,:class=>"form-control" %>
   </div>
 
   <% if current_user.role.name!="admin"%>
   <div class="field">
     <%= f.label :type_of_user %><br />
-    <%= f.select :role_id,[['employee','employee'],['manager','manager']],{:prompt=>"select role_id"}%>
+    <%= f.select :role_id,[['employee','employee'],['manager','manager']],{:prompt=>"select role_id"},:class=>"form-control"%>
   </div>
   <%end%>
 
 
   <div class="field">
     <%= f.label :phone %><br />
-    <%= f.text_field :phone, autofocus: true %>
+    <%= f.text_field :phone, autofocus: true ,:class=>"form-control"%>
   </div>
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.email_field :email, autofocus: true ,:class=>"form-control"%>
   </div>
 
   
@@ -47,7 +51,7 @@
   
 
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= f.submit "Update" ,:class=>"btn btn-info"%>
   </div>
 <% end %>
 
@@ -55,4 +59,6 @@
 
 <%= link_to "Back", :back %>
 
-
+</div>
+</div>
+</div>

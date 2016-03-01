@@ -16,3 +16,6 @@
 //= require_tree .
 
 //= require dataTables/jquery.dataTables
+//= require bootstrap-datepicker
+
+

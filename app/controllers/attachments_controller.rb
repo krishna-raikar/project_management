@@ -1,6 +1,5 @@
 class AttachmentsController < ApplicationController
   load_and_authorize_resource :only => [:edit, :show,:destroy] 
-  before_save :check_data
 
   layout :user_layout
 
@@ -11,9 +10,31 @@ class AttachmentsController < ApplicationController
       "userportal"
     end
   end
+  before_action :set_proj
 
+  def set_proj
+    # raise request.path.inspect
+    unless request.path.eql?("/attachments")
+      @cur_proj = Project.find(params[:project_id])
+    end
+  end
   def index
-  	@attachments = Attachment.all
+  	# @attachments = Project.find(3).issues.joins(:attachment).pluck("attachments.*")
+    k=0
+    @attachments = []
+    Project.find(@cur_proj.id).issues.each do | i |
+       unless i.attachment.nil?
+        @attachments[k] = i.attachment
+        k=k+1; 
+       end
+    end
+    # @s = "avatar1.jpeg".to_file
+    # raise @attachments.inspect
+  end
+
+  def show_all
+    @attachments = Attachment.all
+    
   end
 
   def show
@@ -45,8 +66,4 @@ class AttachmentsController < ApplicationController
       params.require(:attachment).permit(:file,:description)
     end
 
-
-    def check_data
-      raise "e".inspect
-    end
 end

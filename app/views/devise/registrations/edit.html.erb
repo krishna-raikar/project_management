@@ -1,61 +1,71 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+<div class="col-lg-6 col-lg-offset-2">  
+<div class=" panel panel-primary">
+<div class="panel-heading">Edit <%= resource_name.to_s.humanize %></div>
+<div class="panel-body">
+<form class="form-inline">
+
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+  <a href="#"><%= devise_error_messages! %></a>
 
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :firstname %><br />
-    <%= f.text_field :firstname, autofocus: true %>
+    <%= f.text_field :firstname, autofocus: true,:class=>"form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :lastname %><br />
-    <%= f.text_field :lastname, autofocus: true %>
+    <%= f.text_field :lastname, autofocus: true,:class=>"form-control" %>
   </div>
 
   <% if current_user.role.name!="admin"%>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :type_of_user %><br />
-    <%= f.select :role_id,[['employee','employee'],['manager','manager']],{:prompt=>"select role_id"}%>
+    <%= f.select :role_id,[['employee','employee'],['manager','manager']],{:prompt=>"select role_id"},:class=>"form-control"%>
   </div>
   <%end%>
 
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :phone %><br />
-    <%= f.text_field :phone, autofocus: true %>
+    <%= f.text_field :phone, autofocus: true,:class=>"form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.email_field :email, autofocus: true,:class=>"form-control" %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password, autocomplete: "off",:class=>"form-control" %>
   </div>
-
-  <div class="field">
+ <br>
+  <div class="form-group">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    <%= f.password_field :password_confirmation, autocomplete: "off",:class=>"form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
+    <%= f.password_field :current_password, autocomplete: "off",:class=>"form-control" %>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
+  <br><br>
+  <div class="form-group">
+    <%= f.submit "Update",:class=>"btn btn-info btn-block" %>
   </div>
 <% end %>
 
 
 
 <%= link_to "Back", :back %>
+</form>
+</div>
+</div>
+</div>

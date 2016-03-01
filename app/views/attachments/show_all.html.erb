@@ -1,0 +1,47 @@
+<div class="hstyle">All Attachments</div>
+
+
+
+<table id="attachments" border=2 class="ui celled table">
+	<thead>
+		<th>attach_id</th>
+		<th>file_details</th>
+		<th>file_operation</th>
+		<th>description</th>
+		<th>Actions</th>
+
+	</thead>
+	<tbody>
+		<% @attachments.each do |i| %>
+			<tr>
+			<td><%=i.id%></td>
+			<td><%= image_tag(i.file_url) if i.file? %></td>
+        	<td><%= link_to "download file",i.file_url %></td>
+			<td><%=i.description%></td>
+			
+			<td>
+
+			<% if can? :show, i%>
+  					<%= link_to "view", i %> &nbsp 
+			<% end %>
+			<% if can? :edit, i%>
+  				    <%= link_to "edit", edit_attachment_path(i) %>&nbsp 
+			<% end %>
+			<% if can? :destroy, i%>
+  					 <%=link_to 'delete', i, method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%>
+			<% end %>
+			</td>
+			</tr>
+		<%end%>
+	</tbody>
+</table>
+
+
+
+
+
+<script>
+	$(document).ready(function(){
+		 $("#attachments").dataTable()
+	});
+</script>

@@ -1,14 +1,14 @@
-<h1>Issues#index</h1>
+<div class="hstyle">Issues</div>
 
 
 
 <% if current_user.role.name!="admin"%>
 <ul class="nav nav-pills"> 
-    <li <%= request.fullpath == '/issues?view_flag=true'? "class=active": ""%>>
-    <a href="/issues?view_flag=true">submitted_by</a>
+    <li <%= request.fullpath == (project_issues_path+"?view_flag=true")? "class=active": ""%>>
+    <%=link_to "submitted_by",project_issues_path+"?view_flag=true" %>
     </li>
-    <li <%=(request.fullpath == '/issues?view_flag=false' || request.fullpath=="/issues")? "class=active": ""%>>
-    <a href="/issues?view_flag=false">assigned_to_me</a>
+    <li <%=(request.fullpath == project_issues_path+"?view_flag=false" || request.fullpath==project_issues_path)? "class=active": ""%>>
+    <%=link_to "assigned to me",project_issues_path+"?view_flag=false" %>
     </li>            
  </ul>
  <%end%>
@@ -45,13 +45,13 @@
 			<td>
 
 			<% if can? :show, i%>
-  					<%= link_to "view", i %> &nbsp 
+  					<%= link_to "view", [@cur_proj,i] %> &nbsp 
 			<% end %>
 			<% if can? :edit, i%>
-  				    <%= link_to "edit", edit_issue_path(i) %>&nbsp 
+  				    <%= link_to "edit", edit_project_issue_path(@cur_proj,i) %>&nbsp 
 			<% end %>
 			<% if can? :destroy, i%>
-  					 <%=link_to 'delete', i, method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%>
+  					 <%=link_to 'delete', [@cur_proj,i], method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%>
 			<% end %>
 			</td>
 			</tr>
@@ -60,7 +60,7 @@
 </table>
 
 
-<%= link_to "new_issue", new_issue_path %>
+<%= link_to "new_issue", new_project_issue_path %>
 
 
 

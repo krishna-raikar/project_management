@@ -1,4 +1,5 @@
-<h1>All Attachments</h1>
+<div class="hstyle">Project Attachments</div>
+
 
 
 <table id="attachments" border=2 class="ui celled table">
@@ -21,13 +22,13 @@
 			<td>
 
 			<% if can? :show, i%>
-  					<%= link_to "view", i %> &nbsp 
+  					<%= link_to "view", project_attachments_path(@cur_proj,i) %> &nbsp 
 			<% end %>
 			<% if can? :edit, i%>
-  				    <%= link_to "edit", edit_attachment_path(i) %>&nbsp 
+  				    <%= link_to "edit", edit_project_attachment_path(@cur_proj,i) %>&nbsp 
 			<% end %>
 			<% if can? :destroy, i%>
-  					 <%=link_to 'delete', i, method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%>
+  					 <%=link_to 'delete', [@cur_proj,i], method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%>
 			<% end %>
 			</td>
 			</tr>

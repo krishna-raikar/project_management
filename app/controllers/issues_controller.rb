@@ -12,7 +12,11 @@ class IssuesController < ApplicationController
 
 
   before_action :set_param, only:[:show,:edit,:view,:destroy,:update]
+  before_action :set_proj
 
+  def set_proj
+    @cur_proj = Project.find(params[:project_id])
+  end
 
   def view_filter
     # raise "e".inspect
@@ -52,7 +56,7 @@ class IssuesController < ApplicationController
     @issue = Issue.new(issue_param)
     if @issue.save
       flash[:notice] = "issue created successfully"
-      redirect_to issues_path
+      redirect_to project_issues_path
     else
       render 'new'
     end
@@ -64,7 +68,7 @@ class IssuesController < ApplicationController
   def update
      if @issue.update(issue_param)
       flash[:notice] = "issue updated successfully"
-      redirect_to issues_path
+      redirect_to project_issues_path
     else
       render 'edit'
     end
@@ -73,7 +77,7 @@ class IssuesController < ApplicationController
   def destroy
     if @issue.destroy
       flash[:notice] = "issue deleted successfully"
-      redirect_to issues_path
+      redirect_to project_issues_path
     else
       render 'index'
     end

@@ -1,0 +1,163 @@
+
+
+<div class="hstyle">Project Overview</div>
+<div class="row">
+<div class="col-lg-8">
+    
+      	<div class="col-lg-6">
+      		<div class="panel panel-default">
+      	  	<div class="panel-heading">Your Total Projects</div>
+      	  	<div class="panel-body">
+      	  	<div class="h2 text-center"><%=@proj_count%></div>
+              new : <%=@pro_new_count%>
+              running : <%=@pro_running_count%>
+              completed : <%=@pro_complete_count%>
+      	  	</div>
+      	    </div>
+      	</div>
+      	
+</div>
+</div>	
+
+<div class="well"><h3>Current Project :<%=@cur_proj.pname%></h3></div>
+	<div class="row">
+    		<div class="col-lg-4">
+    		<div class="panel panel-default">
+    		 <div class="panel-heading">Issue tracking</div>
+    		 <div class="panel-body">
+    		 <ul>
+    		 	<li>Bugs : <%=@issue_bug%></li>
+    		 	<li>Features : <%=@issue_feature%></li>
+    		 	<li>Support : <%=@issue_support%></li>
+    		 </ul>
+    		 </div>
+    		</div>
+    		</div>
+
+        <div class="col-lg-4">
+        <div class="panel panel-default">
+        <div class="panel-heading">Team mates</div>
+        <div class="panel-body">
+        Manager : <%=@pro_mgr.firstname%><br>
+        other team members:
+        <ul>
+          <% @team_members.each do |tm|%>
+            <li><%=tm.firstname%></li>
+          <%end%>
+          </ul>
+        </div>
+        </div>
+
+        </div>
+
+        <div class="col-lg-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">Your Total Tasks</div>
+            <div class="panel-body">
+            <div class="h3 text-center"><%=@task_count%></div>
+              new : <%=@task_new_count%>
+              running : <%=@task_running_count%>
+              completed : <%=@task_finish_count%> 
+            </div>
+            </div>
+        </div>
+</div> 
+
+
+
+
+
+
+
+
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+	  	<div class="panel-heading">Your Tasks</div>
+	  	<div class="panel-body">
+	  		<ul class="nav nav-tabs">
+	  		
+			  <li <%=request.fullpath == (overview_path+"?task_query=all")? "class=active": ""%>>
+        
+        <%=link_to "all",overview_path+"?task_query=all"%></li>
+			  <li <%=request.fullpath == overview_path+"?task_query=imp"? "class=active": ""%>>
+         <%=link_to "important",overview_path+"?task_query=imp"%>
+        </li>
+			  <li <%=request.fullpath == overview_path+"?task_query=com"? "class=active": ""%>>
+         <%=link_to "completed",overview_path+"?task_query=com"%>
+         </li>
+
+			</ul>
+            <div class=well>
+            	<table class="table table-hover">
+            	<thead>
+            		<th>name</th>
+            		<th>description</th>
+            		<th>days remaining</th>
+            	</thead>
+            	<tbody>
+            		
+            		<% @tasks.each do|t|%>
+            		    <tr>
+            			<td><%=t.name%></td>
+            			<td><%=t.description%></td>
+            			<td><%=t.enddate%></td>
+            			</tr>
+            		<%end%>
+            		
+            	</tbody>
+            	</table>
+
+            </div>	
+	  	</div>
+	    </div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+	  	<div class="panel-heading">Issues</div>
+	  	<div class="panel-body">
+	  		<ul class="nav nav-tabs">
+	  		
+			  <li <%=request.fullpath == (overview_path+"?issue_query=all")? "class=active": ""%>>
+        <%=link_to "all",(overview_path+"?issue_query=all")%></li>
+        <li <%=request.fullpath == (overview_path+"?issue_query=imp")? "class=active": ""%>>
+        <%=link_to "urgent",(overview_path+"?issue_query=imp")%></li>
+        <li <%=request.fullpath == (overview_path+"?issue_query=com")? "class=active": ""%>>
+        <%=link_to "completed",(overview_path+"?issue_query=com")%></li>
+
+
+			  
+
+			</ul>
+            <div class=well>
+            	<table class="table table-hover">
+            	<thead>
+            		<th>title</th>
+            		<th>description</th>
+            		<th>severity</th>
+            	</thead>
+            	<tbody>
+            		
+            		<% @issues.each do|t|%>
+            		    <tr>
+            			<td><%=t.title%></td>
+            			<td><%=t.description%></td>
+            			<td><%=t.severity%></td>
+            			</tr>
+            		<%end%>
+            		
+            	</tbody>
+            	</table>
+
+            </div>	
+	  	</div>
+	    </div>
+	</div>
+</div>
+
+
+
+

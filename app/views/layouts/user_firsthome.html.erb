@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Portal</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+   
+   <!-- <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.min.css">
+   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.11/css/dataTables.semanticui.min.css"></head> -->
+   <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+   <script type="text/javascript" src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+   <!-- <script type="text/javascript" src="https://cdn.datatables.net/1.10.11/js/dataTables.semanticui.min.js"></script>
+   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.min.js"></script> -->
+
+  <!--  <script src="/assets/jquery.js"></script>
+
+    Bootstrap Core JavaScript
+    <script src="/assets/bootstrap.min.js"></script> -->
+   
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+
+<nav id="mynav" class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"><img id="logo" src="/assets/Promax.png"></a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li <%=request.path=="/promax"? "class=active": "" %>><a href="/promax">Home</a></li>
+    
+      <li <%=request.path=="/projects"? "class=active": "" %>><a href="/projects">projects</a></li>
+      <li><a href="#">contact</a></li>
+      
+     
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="">
+        <%=current_user.firstname%> | [<%=current_user.role.name%>]
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><%=link_to "Profile",user_path(current_user.id)%></li>
+          <li><%= link_to "Account settings",edit_user_registration_path(current_user.id)%></li>
+                  
+          <li><%=link_to "logout",destroy_user_session_path,method: :delete%></li>
+          
+        </ul>
+      </li>
+      
+     
+    </ul>
+  </div>
+</nav>
+
+
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        
+                        <p class="notice"><%= notice %></p>
+                        <p class="alert"><%= alert %></p>
+
+                        <%= yield %>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+
+
+
+
+</body>
+</html>

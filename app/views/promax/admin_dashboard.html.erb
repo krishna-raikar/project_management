@@ -1,0 +1,83 @@
+
+<div class="hstyle">admin dashboard</div>
+
+<div class="row">
+	<div class="col-lg-3">
+		<div class="panel panel-default">
+	  	<div class="panel-heading">Projects Count</div>
+	  	<div class="panel-body">
+	  	<div class="h2 text-center"><%=@proj_count%></div>
+              new : <%=@pro_new_count%>
+              running : <%=@pro_running_count%>
+              completed : <%=@pro_complete_count%>
+      	  	</div>
+	  	
+	    </div>
+	</div>
+	<div class="col-lg-3">
+		<div class="panel panel-default">
+	  	<div class="panel-heading">Files Count</div>
+	  	<div class="panel-body">
+	  	 <%=@attach_count%></div>
+	    </div>
+	</div>
+	<div class="col-lg-3">
+		<div class="panel panel-default">
+	  	<div class="panel-heading">User Count</div>
+	  	<div class="panel-body">
+	  	Registered Users :<%=@user_count%>
+	  	Employees : <%= @emp_count%><br>
+	  	Managers  : <%= @mgr_count%>
+	  	</div>
+	    </div>
+	</div>
+	<div class="col-lg-3">
+		<div class="panel panel-default">
+	  	<div class="panel-heading">Messages</div>
+	  	<div class="panel-body">#count</div>
+	    </div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+	  	<div class="panel-heading">users track</div>
+	  	<div class="panel-body">
+	  	    <table class="table">
+	  	    	<thead>
+	  	    		<th>userid</th>
+	  	    		<th>name</th>
+	  	    		<th>current_sign_in</th>
+	  	    		<th>last_sign_in</th>
+	  	    		<th>current_logged_IP</th>
+	  	    		<th>last_logged_IP</th>
+	  	    	</thead>
+	  	    	<tbody>
+	  	    		
+	  		<% @user_track.each do | u| %>
+	  			<tr>
+	  	    			<td><%=u.id%></td>
+	  	    			<td><%=u.firstname%></td>
+	  	    			<td><%=u.current_sign_in_at%></td>
+	  	    			<td><%=u.last_sign_in_at%></td>
+	  	    			<td><%=u.current_sign_in_ip%></td>
+	  	    			<td><%=u.last_sign_in_ip%></td>
+	  	    		</tr>
+	  	    	
+	  		<%end%>
+	  		</tbody>
+	  	    </table>	
+	  	</div>
+	    </div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+	  	<div class="panel-heading">Activity track</div>
+	  	<div class="panel-body"></div>
+	    </div>
+	</div>
+</div>

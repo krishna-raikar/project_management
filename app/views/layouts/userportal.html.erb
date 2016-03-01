@@ -4,18 +4,19 @@
   <title>User Portal</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 
   <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
    
-   <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.min.css">
-   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.11/css/dataTables.semanticui.min.css"></head>
-   <script type="text/javascript" src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+  <!--  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.min.css">
+   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.11/css/dataTables.semanticui.min.css"> -->
+   <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
    <script type="text/javascript" src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
-   <script type="text/javascript" src="https://cdn.datatables.net/1.10.11/js/dataTables.semanticui.min.js"></script>
-   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.min.js"></script>
+   <!-- <script type="text/javascript" src="https://cdn.datatables.net/1.10.11/js/dataTables.semanticui.min.js"></script>
+   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.min.js"></script> -->
 
   <!--  <script src="/assets/jquery.js"></script>
 
@@ -26,33 +27,92 @@
 </head>
 <body>
 
-<div id="wrapper">
+<nav id="mynav" class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"><img id="logo" src="/assets/Promax.png"></a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li <%=request.path=="/promax"? "class=active": "" %>><a href="/promax">Home</a></li>
+    
+      <li <%=request.path=="/projects"? "class=active": "" %>><a href="/projects">projects</a></li>
+      <li><a href="#">contact</a></li>
+      
+     
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="">
+        <%=current_user.firstname%> | [<%=current_user.role.name%>]
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><%=link_to "Profile",user_path(current_user.id)%></li>
+          <li><%= link_to "Account settings",edit_user_registration_path(current_user.id)%></li>
+                  
+          <li><%=link_to "logout",destroy_user_session_path,method: :delete%></li>
+          
+        </ul>
+      </li>
+      
+     
+    </ul>
+  </div>
+</nav>
+
+
+<div id="wrapper" style="padding-top : 50px">
 
         <!-- Sidebar -->
-        <div id="sidebar-wrapper">
+
+        <%
+           show_flag =false
+          if controller.controller_name.eql?("projects") 
+            unless params[:id].nil?
+              show_flag = true
+            end  
+          else
+            unless params[:project_id].nil?
+              show_flag = true  
+            end
+          end
+
+        %>
+        <%if show_flag %>
+        <div id="sidebar-wrapper" >
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                     <a href="#">
                         PromAX
                     </a>
                 </li>
-                <li <%=request.path == '/'? "class=active": ""%>><a href="/">Dashboard</a></li>
-                <li <%=request.path == '/projects'? "class=active": ""%>><a href="/projects">my Projects</a></li>
-                <li <%=request.path == '/tasks'? "class=active": ""%>><a href="/tasks">Tasks</a></li>
-                <li <%=request.path == '/issues'? "class=active": ""%>><a href="/issues">Issues</a></li>
-                <li <%=request.path == '/attachments'? "class=active": ""%>><a href="#">Attachments</a></li>
+                  <%  
+                 if controller.controller_name.eql?("projects")
+                    @proj = Project.find_by(id:params[:id])
+                 else
+                    @proj = Project.find_by(id:params[:project_id])
+                 end    
+                 %>
+                <li <%=request.path == '/overview'? "class=active": ""%>>
+                <%=link_to "overview",overview_path(@proj)%>
+                </li>
+
+                <li <%=request.path == '/tasks'? "class=active": ""%>>
+                <%=link_to "my tasks",project_tasks_path(@proj)%>
+                </li>
+                <li <%=request.path == '/issues'? "class=active": ""%>>
+                <%=link_to "issues",project_issues_path(@proj)%>
+                </li>
+                <li <%=request.path == '/attachments'? "class=active": ""%>>
+                <%=link_to "attachments",project_attachments_path(@proj)%>
+                </li>
                 <% if user_signed_in? %>
                 <li><%= link_to "Logout", destroy_user_session_path,method: :delete %></li>
                 <%end%>
+                
             </ul>
         </div>
-
-        
-
-
-
-
-
+        <%end%>
         <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
@@ -60,7 +120,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle view</a>
+                        
                         <p class="notice"><%= notice %></p>
                         <p class="alert"><%= alert %></p>
 

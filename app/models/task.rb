@@ -6,7 +6,7 @@ class Task < ActiveRecord::Base
 
 
 	validates :name, :startdate, :enddate, :status,:description,:project_id,:entry_date, presence: true
-	validates :name,format: {with: /\A[a-zA-Z]{2,20}\Z/}, :unless => Proc.new{|f| f.blank?}
+	validates :name,format: {with: /\A[a-zA-Z0-9]{2,20}\Z/}, :unless => Proc.new{|f| f.blank?}
 	validate :startdate_check
 	validate :enddate_check
 	validate :entrydate_check

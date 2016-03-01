@@ -7,12 +7,12 @@ class Project < ActiveRecord::Base
     # has_and_belongs_to_many :users
 
     has_many :issues
-    has_many :users,through: :issues
+    # has_many :users,through: :issues
 
 
 
     validates :pname, :startdate, :enddate, :duedate, :status, presence: true
-	validates :pname,format: {with: /\A[a-zA-Z]{2,20}\Z/}, :unless => Proc.new{|f| f.blank?}
+	validates :pname,format: {with: /\A[a-zA-Z0-9]{2,20}\Z/}, :unless => Proc.new{|f| f.blank?}
 	validate :startdate_check
 	validate :enddate_check
 	validate :duedate_check

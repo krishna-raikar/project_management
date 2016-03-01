@@ -38,7 +38,7 @@ gem 'mini_magick'
 
 gem 'bootstrap-sass', '~> 2.3.2'
 
-
+gem 'bootstrap-datepicker-rails'
 
 
 
