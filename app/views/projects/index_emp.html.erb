@@ -28,7 +28,10 @@
 </table>
 
 
-<%= link_to "new_Project", new_project_path %>
+
+<% if can? :create, Project.new%>
+  					<%= link_to "NEW PROJECT", new_project_path,:class=>"btn btn-default btn-success" %>
+<%end%>
 </div>
 
 

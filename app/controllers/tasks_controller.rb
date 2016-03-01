@@ -23,10 +23,11 @@ class TasksController < ApplicationController
     def index
       
       if current_user.role.name!="admin"
-        @tasks = current_user.assigned_issues
+        @tasks = current_user.tasks
       else
         @tasks = Task.all
       end
+      # raise @tasks.inspect
     end
 
     def new

@@ -43,12 +43,12 @@
 
   <div class="field">
     <%=f.label :project%>
-    <%=f.collection_select :project_id,Project.all,:id,:pname,{:prompt=>'choose project'}%>
+    <%=f.collection_select :project_id,Project.where(:id=>current_user.projects),:id,:pname,{:prompt=>'choose project'}%>
   </div>
 
   <div class="field">
     <%=f.label :assign_to%>
-    <%=f.collection_select :user_id,User.where(role_id:Role.select("id").find_by(name:"employee")),:id,:firstname,{:prompt=>'choose user'}%>
+    <%=f.collection_select :user_id,User.where.not(role_id:Role.where(name:["admin","manager"])),:id,:firstname,{:prompt=>'choose user'}%>
   </div>
 
   <div class="field">

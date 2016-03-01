@@ -7,6 +7,12 @@ Rails.application.routes.draw do
 
   root "promax#welcome"
   get '/promax'=>"promax#index"
+
+
+
+  get "promax/autocomplete_project_pname" => "promax#autocomplete_project_pname"
+
+
   resources :attachments
   # get 'attachments/index'
 

@@ -2,6 +2,8 @@ class PromaxController < ApplicationController
   
   # before_action :authenticate_user!
    # layout :user_layout
+   autocomplete :project, :pname
+
 
    def user_layout
     if current_user.role.name=="admin"

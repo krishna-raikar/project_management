@@ -34,9 +34,9 @@
 	</tbody>
 </table>
 
-
+<% if can? :create, ProjectUser.new%>
 <%= link_to "new record", new_project_user_path %>
-
+<%end%>
 <script>
 	$(document).ready(function(){
 		 $("#project_users").dataTable()

@@ -19,7 +19,7 @@ class Project < ActiveRecord::Base
 
    status_list = ['new','In progres','pending','canceled','closed']
 	validates_inclusion_of :status, :in => status_list, :message => 'choose from the available options'
-
+    validates_uniqueness_of :pname
 		
 	def startdate_check
 		 errors.add(:startdate,  "can't be in the past") if

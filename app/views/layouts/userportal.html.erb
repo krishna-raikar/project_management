@@ -44,7 +44,7 @@
       
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="">
-        <%=current_user.firstname%> | [<%=current_user.role.name%>]
+        <%=current_user.firstname%> | <span style="color:orange">[<%=current_user.role.name%>]</span>
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><%=link_to "Profile",user_path(current_user.id)%></li>

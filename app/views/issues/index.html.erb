@@ -60,8 +60,9 @@
 </table>
 
 
+<% if can? :create, Issue.new%>
 <%= link_to "new_issue", new_project_issue_path %>
-
+<%end%>
 
 
 <script>

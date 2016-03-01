@@ -14,10 +14,23 @@ class AttachmentsController < ApplicationController
 
   def set_proj
     # raise request.path.inspect
-    unless request.path.eql?("/attachments")
-      @cur_proj = Project.find(params[:project_id])
+    
+    # a= request.path
+    #   a = a.slice(1...a.length)
+    #   # a="a/b/c/d"
+    #   # raise a.inspect
+    #   if
+    #   q= a.slice(0...(a.index('/')))
+    #   # raise q.inspect
+    #  if q.eql?("projects")
+    a = request.path
+    if a.include? "projects" and (a.include? "attachments" or a.include? "attachment")
+        @cur_proj = Project.find(params[:project_id])
     end
+    # end
   end
+
+
   def index
   	# @attachments = Project.find(3).issues.joins(:attachment).pluck("attachments.*")
     k=0

@@ -15,21 +15,36 @@
 		<% @attachments.each do |i| %>
 			<tr>
 			<td><%=i.id%></td>
-			<td><%= image_tag(i.file_url) if i.file? %></td>
+			<td><%= image_tag(i.file_url(:thumb)) if i.file? %></td>
         	<td><%= link_to "download file",i.file_url %></td>
 			<td><%=i.description%></td>
 			
 			<td>
+            <%if current_user.role.name.eql?("admin")%>
+               <% if can? :show, i%>
+	  					<%= link_to "view",i %> &nbsp 
+				<% end %>
+				<% if can? :edit, i%>
+	  				    <%= link_to "edit", edit_attachment_path(i) %>&nbsp 
+				<% end %>
+				<% if can? :destroy, i%>
+	  					 <%=link_to 'delete', i, method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%>
+				<% end %>
 
-			<% if can? :show, i%>
-  					<%= link_to "view", project_attachments_path(@cur_proj,i) %> &nbsp 
-			<% end %>
-			<% if can? :edit, i%>
-  				    <%= link_to "edit", edit_project_attachment_path(@cur_proj,i) %>&nbsp 
-			<% end %>
-			<% if can? :destroy, i%>
-  					 <%=link_to 'delete', [@cur_proj,i], method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%>
-			<% end %>
+            <%else%>
+	            <% if can? :show, i%>
+	  					<%= link_to "view", project_attachments_path(@cur_proj,i) %> &nbsp 
+				<% end %>
+				<% if can? :edit, i%>
+	  				    <%= link_to "edit", edit_project_attachment_path(@cur_proj,i) %>&nbsp 
+				<% end %>
+				<% if can? :destroy, i%>
+	  					 <%=link_to 'delete', [@cur_proj,i], method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%>
+				<% end %>
+
+            <%end%>
+
+			
 			</td>
 			</tr>
 		<%end%>

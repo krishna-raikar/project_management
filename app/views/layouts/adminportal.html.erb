@@ -46,10 +46,19 @@
      
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      
+      <li>
+        <%=form_tag('/projects', method: :get) do %>
+         <input name="search_text" id="search_text" type="text" class="form-control" placeholder="Search" data-autocomplete="promax/autocomplete_project_pname"></li><li>
+
+       <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+       <%end%>
+     
+      </li>
+     
+
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="">
-        <%=current_user.firstname%> | [<%=current_user.role.name%>]
+        <%=current_user.firstname%> | <span style="color:orange">[<%=current_user.role.name%>]</span>
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><%=link_to "Profile",user_path(current_user.id)%></li>

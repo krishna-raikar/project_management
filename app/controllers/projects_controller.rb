@@ -21,12 +21,17 @@ class ProjectsController < ApplicationController
 
     before_action :set_param, only:[:show,:edit,:view,:destroy,:update]
     def index
+
       unless current_user.role.name.eql?("admin")
         @projects = current_user.projects      
         # render template:@projects
          render "index_emp"
       else
-        @projects = Project.all  
+        unless params[:search_text].nil?
+          @projects = Project.where(pname:params[:search_text])
+        else 
+          @projects = Project.all
+        end
         render "index_emp",layout: user_layout
       end
 
@@ -99,10 +104,10 @@ class ProjectsController < ApplicationController
     @issue_bug=current_user.assigned_issues.where(issue_category:"bug",project_id:@cur_proj.id).where.not(status:"completed").count
     @issue_feature=current_user.assigned_issues.where(issue_category:"feature",project_id:@cur_proj.id).where.not(status:"completed").count
     @issue_support=current_user.assigned_issues.where(issue_category:"support",project_id:@cur_proj.id).where.not(status:"completed").count
-  
+    
     @pro_mgr=current_user.projects.find(@cur_proj.id).users.find_by(role_id:Role.find_by(name:"manager"))
     @team_members = current_user.projects.find(@cur_proj.id).users.where(role_id:Role.find_by(name:"employee")).where.not(id:current_user.id)
-    
+    # raise @pro_mgr.inspect
 
     @p = request.query_parameters
     @tasks = current_user.tasks.where(project_id:@cur_proj.id)

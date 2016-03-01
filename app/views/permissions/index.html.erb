@@ -2,7 +2,7 @@
 
 <table id="permissions" border=2 class="ui celled table">
 	<thead>
-		<th>roll_id</th>
+		<th>role</th>
 		<th>modelname</th>
 		<th>permissions</th>
 		<th>Actions</th>
@@ -10,7 +10,7 @@
 	<tbody>
 		<% @permissions.each do |p| %>
 			<tr>
-			<td><%=p.role_id%></td>
+			<td><%=p.role.name%></td>
 			<td><%=p.modelname%></td>
 			<td><%=p.per_list%></td>
 			<td>
@@ -31,7 +31,9 @@
 </table>
 
 
+<% if can? :create, Permission.new%>
 <%= link_to "new_Permission", new_permission_path %>
+<%end%>
 
 
 <script>

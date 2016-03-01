@@ -31,7 +31,9 @@
 </table>
 
 
+<% if can? :create, Role.new%>
 <%= link_to "new_role", new_role_path %>
+<%end%>
 
 <script>
 	$(document).ready(function(){

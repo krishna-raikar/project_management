@@ -40,7 +40,10 @@ gem 'bootstrap-sass', '~> 2.3.2'
 
 gem 'bootstrap-datepicker-rails'
 
+gem 'rails4-autocomplete'
 
+# jQuery UI dependency.
+gem 'jquery-ui-rails'
 
 
 # Use ActiveModel has_secure_password

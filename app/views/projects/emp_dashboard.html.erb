@@ -43,7 +43,11 @@ Current Project :<%=@cur_proj.pname%>
         <div class="panel panel-default">
         <div class="panel-heading">Team mates</div>
         <div class="panel-body">
-        Manager : <%=@pro_mgr.firstname%><br>
+        Manager : <%      
+        unless @pro_mgr.nil?
+          @pro_mgr.firstname
+        end   
+        %><br>
         other team members:
         <ul>
           <% @team_members.each do |tm|%>
