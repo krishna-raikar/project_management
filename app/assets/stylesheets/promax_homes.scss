@@ -131,6 +131,10 @@
 }
 
 
+#page-content-wrapper{
+  
+  overflow : auto;
+}
 
 
 
@@ -168,4 +172,20 @@ font-weight : bold;
      background-color : fff;
      z-index : 5000;
     
+}
+
+
+
+
+
+
+/*****************************/
+
+#wrapper{
+  padding-left:150px;
+}
+
+#wrapper > #sidebar-wrapper {
+    background-color: #000;
+    width : 150px;
 }

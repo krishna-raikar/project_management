@@ -4,12 +4,41 @@
 
 <div class="hstyle">Account Details</div>
 
+<div class="row">
+
+
+<div class="col-lg-4 col-lg-offset-2">
+
+<% if current_user.attachment.nil? %>
+
+<%=image_tag  "/assets/default/thumb_lg_default-profile.png",:class=>"img-circle"%><br><br>
+<%=form_for Attachment.new do |f|%>
+	<%=f.file_field :file,accept: 'image/png,image/gif,image/jpeg,pdf,doc,docx'%><br>
+	<%=f.submit "change avatar",:class=>"btn btn-info btn-lg" %>
+<%end%>
+
+
+<%else%>
+<%=image_tag  current_user.attachment.file_url(:thumb_lg),:class=>"img-circle"%><br><br>
+
+<%=form_for Attachment.find_by(attachable_id:current_user.id,attachable_type:"User") do |f|%>
+	<%=f.file_field :file,accept: 'image/png,image/gif,image/jpeg,pdf,doc,docx'%><br>
+	<%=f.submit "change avatar",:class=>"btn btn-info btn-lg" %>
+<%end%>
+<%end%>
+</div>
+
+
+
+<div class="col-lg-6">
 <table id="user-show-tb"  class="table">
 	<thead>
 		
 		
 	</thead>
 	<tbody>
+			
+
 			<tr>
 			<td>User-ID</td><td><%=@user.id%></td>
 			</tr>
@@ -34,3 +63,5 @@
 </table>
 
 <%=link_to 'back',users_path%>
+</div>
+</div>

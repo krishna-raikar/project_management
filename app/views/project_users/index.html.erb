@@ -1,5 +1,15 @@
 <div class="hstyle">Project users</div>
 
+<% if current_user.role.name=="admin"%>
+<ul class="nav nav-pills"> 
+    <li <%= request.fullpath == (project_project_users_path+"?view_flag=true")? "class=active": ""%>>
+    <%=link_to "view_all",project_project_users_path+"?view_flag=true" %>
+    </li>
+    <li <%=(request.fullpath == project_project_users_path+"?view_flag=false" || request.fullpath==project_project_users_path)? "class=active": ""%>>
+    <%=link_to "current_project",project_project_users_path+"?view_flag=false" %>
+    </li>            
+ </ul>
+ <%end%>
 
 <table id="project_users" border=2 class="ui celled table">
 	<thead>
@@ -14,15 +24,15 @@
 			<td><%=p[0]%></td>
 			<td><%=p[1]%></td>
 			<td>
-
+           
 			<% if can? :show, p%>
-  					<%= link_to "view",  project_user_path(p[2]) %> &nbsp 
+  					<%= link_to "view",  project_project_user_path(@cur_proj,p[2]) %> &nbsp 
 			<% end %>
 			<% if can? :edit, p%>
-  				    <%= link_to "edit", edit_project_user_path(p[2]) %>&nbsp 
+  				    <%= link_to "edit", edit_project_project_user_path(@cur_proj,p[2]) %>&nbsp 
 			<% end %>
 			<% if can? :destroy, p%>
-  					 <%=link_to 'delete', project_user_path(p[2]) , method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%>
+  					 <%=link_to 'delete', project_project_user_path(@cur_proj,p[2]) , method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%>
 			<% end %>
 
 
@@ -35,7 +45,7 @@
 </table>
 
 <% if can? :create, ProjectUser.new%>
-<%= link_to "new record", new_project_user_path %>
+<%= link_to "change/add employees ", new_project_project_user_path %>
 <%end%>
 <script>
 	$(document).ready(function(){

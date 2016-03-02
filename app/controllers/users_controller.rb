@@ -1,5 +1,5 @@
 class UsersController<ApplicationController
-  load_and_authorize_resource :only => [:edit, :show,:destroy] 
+  load_and_authorize_resource :only => [:index,:edit, :show,:destroy] 
   layout :user_layout
 
   def user_layout
@@ -71,16 +71,21 @@ class UsersController<ApplicationController
     end
 
     def show
-    	render 'devise/show'
+      flag = params[:id].eql?(current_user.id.to_s)
+      unless flag
+        redirect_to user_path(current_user.id)
+      else
+    	  render 'devise/show'
+      end
     end
 
 
     def set_param
-      @user = User.find(params[:id])
+      @user = User.find_by(id:current_user.id)
     end
 
     def user_param
-      params.require(:user).permit(:firstname,:lastname,:phone,:email,:role_id)
+      params.require(:user).permit(:firstname,:lastname,:phone,:email,:role_id,attachment_attributes: [:file,:description])
     end
 
 end

@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
 
 
-  get "promax/autocomplete_project_pname" => "promax#autocomplete_project_pname"
+  get "promax/autocomplete_project_pname" => "promax#autocomplete_project_pname",as: :proj_autocomplete
 
 
   resources :attachments

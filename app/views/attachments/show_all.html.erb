@@ -15,7 +15,7 @@
 		<% @attachments.each do |i| %>
 			<tr>
 			<td><%=i.id%></td>
-			<td><%= image_tag(i.file_url(:thumb)) if i.file? %></td>
+			<td><%= image_tag(i.file_url(:thumb_md)) if i.file? %></td>
         	<td><%= link_to "download file",i.file_url %></td>
 			<td><%=i.description%></td>
 			

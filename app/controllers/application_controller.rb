@@ -27,14 +27,20 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
   	devise_parameter_sanitizer.for(:sign_up) do |u|
-  		u.permit(:firstname,:lastname,:email,:password,:role_id,:phone,:password_confirmation, :remember_me)
+  		u.permit(:firstname,:lastname,:email,:password,:role_id,:phone,:password_confirmation, :remember_me,attachment_attributes: [:file,:description])
   	end
 
   	devise_parameter_sanitizer.for(:account_update) do |u|
-  		u.permit(:firstname,:lastname,:email,:password,:role_id,:phone,:password_confirmation, :remember_me,:current_password)
+  		u.permit(:firstname,:lastname,:email,:password,:role_id,:phone,:password_confirmation, :remember_me,:current_password,attachment_attributes: [:file,:description])
   	end
   end
+  
 
+
+  # CanCan - pass params in to Ability
+  def current_ability
+      @current_ability ||= Ability.new(current_user, params)
+  end
 
 
    # rescue_from ActiveRecord::RecordNotFound,
@@ -50,7 +56,13 @@ class ApplicationController < ActionController::Base
   
   #for handling exception occured from cancancan
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to "/"+params[:controller] , :alert => exception.message
+    # if params[:controller].eql?("users")
+    #   redirect_to (:back), :alert => exception.message
+    # else 
+      redirect_to (:back) , :alert => exception.message
+      redirect_to "/"+params[:controller] , :alert => exception.message
+      # redirect_to request.env["HTTP_REFERER"] , :alert => exception.message
+    # end
   end
 
 end

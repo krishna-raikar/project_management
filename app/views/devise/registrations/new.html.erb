@@ -22,7 +22,7 @@
 
   <div class="field">
     <%= f.label :type_of_user %><br />
-    <%= f.collection_select :role_id,Role.all,:id,:name,{:prompt=>"what type of user are you?"},:class=>"form-control"%>
+    <%= f.collection_select :role_id,Role.where.not(name:"admin"),:id,:name,{:prompt=>"what type of user are you?"},:class=>"form-control"%>
 </div>
 
 
@@ -48,6 +48,14 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off",:class=>"form-control" %>
   </div>
+
+  <%= f.fields_for :attachment_attributes,@attachment do |at|%>
+    <div class="field">
+      <%=at.label :profile_picture%>
+      <%=at.file_field :file%>
+    </div>
+
+  <% end %>
 
 
   <br>

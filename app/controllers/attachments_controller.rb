@@ -46,7 +46,7 @@ class AttachmentsController < ApplicationController
   end
 
   def show_all
-    @attachments = Attachment.all
+    @attachments = Attachment.where(attachable_type: "Issue")
     
   end
 
@@ -54,12 +54,23 @@ class AttachmentsController < ApplicationController
   end
 
   def create
-    raise "entered".inspect
+    # raise "entered".inspect
   	@attachment = Attachment.new(attachment_param)
+    @attachment.update_attributes(attachable_id:current_user.id,attachable_type:"User")
   	@attachment.save!
+    redirect_to(:back)
   end
 
   def edit
+    # raise @attachment.inspect
+  end
+
+  def update
+     @attachment = Attachment.find(params[:id])
+
+      # raise params[:attachment][:file].inspect
+      @attachment.update(file:params[:attachment][:file])
+      redirect_to(:back)
   end
 
 

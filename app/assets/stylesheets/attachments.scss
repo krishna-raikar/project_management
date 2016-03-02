@@ -3,3 +3,14 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+#user-show-tb .table {
+	border : 0px !important;
+
+}
+
+
+#user-show-tb >.table th,#user-show-tb > .table td {
+	border : 0px !important;
+	padding : 20px !important;
+	font-size : 15px !important;
+}

@@ -17,12 +17,14 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
-  # def default_url
-  #   # For Rails 3.1+ asset pipeline compatibility:
-  #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
-  #
-  #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
-  # end
+  def default_url
+    # For Rails 3.1+ asset pipeline compatibility:
+    # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
+  
+    "/assets/images/" + [version_name, "default-profile.png"].compact.join('_')
+  end
+
+
 def image?(new_file)
     # raise new_file.content_type.inspect
     new_file.content_type.start_with? 'image'
@@ -41,15 +43,24 @@ def image?(new_file)
   # end
 
   # Create different versions of your uploaded files:
-  version :thumb do
+  version :thumb_lg do
+    process resize_to_fit: [200, 200],:if=>:image?
+  end
+
+  version :thumb_md do
     process resize_to_fit: [100, 100],:if=>:image?
+  end
+
+  version :thumb_sm do
+    
+    process resize_to_fit: [25, 25],:if=>:image?
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
-  # def extension_white_list
-  #   %w(jpg jpeg gif png)
-  # end
+  def extension_white_list
+    %w(jpg jpeg gif png pdf doc docx)
+  end
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.

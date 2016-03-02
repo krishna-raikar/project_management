@@ -18,56 +18,56 @@
 
   <div class="field">
   	<%=f.label :title%>
-  	<%=f.text_field :title%>
+  	<%=f.text_field :title,:class=>"form-control"%>
   </div>
 
   <div class="field">
   	<%=f.label :description%>
-  	<%=f.text_area :description%>
+  	<%=f.text_area :description,:class=>"form-control"%>
   </div>
   
   <div class="field">
     <%=f.label :issue_category%>
     <% cat = ['bug','feature','support'] %>
-    <%= f.select :issue_category,cat.each_with_index.map {|name, index| [name,name]},{:prompt=>"select category"} %>
+    <%= f.select :issue_category,cat.each_with_index.map {|name, index| [name,name]},{:prompt=>"select category"},:class=>"form-control" %>
   </div>
 
   <div class="field">
   	<%=f.label :priority%>
   	<% priority = ['urgent','high','medium','low'] %>
-    <%= f.select :priority,priority.each_with_index.map {|name, index| [name,name]},{:prompt=>"select prioriy"} %>
+    <%= f.select :priority,priority.each_with_index.map {|name, index| [name,name]},{:prompt=>"select prioriy"},:class=>"form-control" %>
   </div>
 
   <div class="field">
   	<%=f.label :severity%>
   	<% severity = ['blocker','critical','major','minor','trivial'] %>
-    <%= f.select :severity,severity.each_with_index.map {|name, index| [name,name]},{:prompt=>"select severity"} %>
+    <%= f.select :severity,severity.each_with_index.map {|name, index| [name,name]},{:prompt=>"select severity"},:class=>"form-control" %>
   </div>
 
   <div class="field">
   	<%=f.label :status%>
   	<% status = ['new','In progres','pending','canceled','completed'] %>
-    <%= f.select :status,status.each_with_index.map {|name, index| [name,name]},{:prompt=>"select status"} %>
+    <%= f.select :status,status.each_with_index.map {|name, index| [name,name]},{:prompt=>"select status"},:class=>"form-control" %>
   </div>
 
   <div class="field">
   	<%=f.label :entry_date%>
-  	<%=f.date_select :entry_date%>
+  	<%=f.date_select :entry_date,{},:class=>"form-control"%>
   </div>
 
   <div class="field">
     <%=f.label :project_id%>
-    <%=f.collection_select :project_id,Project.where(:id=>current_user.projects),:id,:pname,{:prompt=>'select projectid'}%>
+    <%=f.collection_select :project_id,Project.where(:id=>current_user.projects),:id,:pname,{:prompt=>'select projectid'},:class=>"form-control"%>
   </div>
 
   <div class="field">
     <%=f.label :creator_id%>
-    <%=f.text_field :creator_id,:value=>current_user.id%>
+    <%=f.text_field :creator_id,:value=>current_user.id,:class=>"form-control"%>
   </div>
 
   <div class="field">
     <%=f.label :assignee_id%>
-    <%=f.collection_select :assignee_id,User.where.not(role_id:Role.where(name:["admin","manager"])),:id,:firstname,{:prompt=>'select assignee'}%>
+    <%=f.collection_select :assignee_id,User.where.not(role_id:Role.where(name:["admin","manager"])),:id,:firstname,{:prompt=>'select assignee'},:class=>"form-control"%>
   </div>
 
   <%= f.fields_for :attachment_attributes,@attachment do |at|%>
@@ -78,11 +78,11 @@
     
     <div class="field">
       <%=at.label :attachment_description%>
-      <%=at.text_area :description%>
+      <%=at.text_area :description,:class=>"form-control"%>
     </div>
   <% end %>
   
 
-  <%=f.submit %>
+  <%=f.submit :class=>"btn btn-primary"%>
 
 <%end%>

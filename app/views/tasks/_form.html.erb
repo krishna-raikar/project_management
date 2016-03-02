@@ -17,43 +17,43 @@
 
   <div class="field">
   	<%=f.label :name%>
-  	<%=f.text_field :name%>
+  	<%=f.text_field :name,:class=>"form-control"%>
   </div>
 
   <div class="field">
   	<%=f.label :startdate%>
-  	<%=f.date_select :startdate%>
+  	<%=f.date_select :startdate,{},:class=>"form-control"%>
   </div>
 
   <div class="field">
   	<%=f.label :enddate%>
-  	<%=f.date_select :enddate%>
+  	<%=f.date_select :enddate,{},:class=>"form-control"%>
   </div>
 
   <div class="field">
   	<%=f.label :status%>
   	<% status = ['new','In progres','pending','canceled','completed'] %>
-    <%= f.select :status,status.each_with_index.map {|name, index| [name,name]},{:prompt=>"select status"} %>
+    <%= f.select :status,status.each_with_index.map {|name, index| [name,name]},{:prompt=>"select status"},:class=>"form-control" %>
   </div>
 
   <div class="field">
   	<%=f.label :description%>
-  	<%=f.text_area :description%>
+  	<%=f.text_area :description,:class=>"form-control"%>
   </div>
 
   <div class="field">
     <%=f.label :project%>
-    <%=f.collection_select :project_id,Project.where(:id=>current_user.projects),:id,:pname,{:prompt=>'choose project'}%>
+    <%=f.collection_select :project_id,Project.where(:id=>current_user.projects),:id,:pname,{:prompt=>'choose project'},:class=>"form-control"%>
   </div>
 
   <div class="field">
     <%=f.label :assign_to%>
-    <%=f.collection_select :user_id,User.where.not(role_id:Role.where(name:["admin","manager"])),:id,:firstname,{:prompt=>'choose user'}%>
+    <%=f.collection_select :user_id,User.where.not(role_id:Role.where(name:["admin","manager"])),:id,:firstname,{:prompt=>'choose user'},:class=>"form-control"%>
   </div>
 
   <div class="field">
     <%=f.label :entry_date%>
-    <%=f.date_select :entry_date%>
+    <%=f.date_select :entry_date,{},:class=>"form-control"%>
   </div>
 
   <%=f.submit %>

@@ -18,13 +18,13 @@
 
   <div class="field">
     <%=f.label :role_id%>
-    <%=f.collection_select :role_id,Role.where.not(name:"admin"),:id,:name,{:prompt=>'choose role'}%>
+    <%=f.collection_select :role_id,Role.where.not(name:"admin"),:id,:name,{:prompt=>'choose role'},:class=>"form-control"%>
   </div>
 
   <div class="field">
     <%=f.label :modelname%>
-    <% models=['all','project','task','issue'] %>
-    <%=f.select :modelname,models.map{|k,v| [k,k] },{:prompt=>'choose model'}%>
+    <% models=['all','project','task','issue','user'] %>
+    <%=f.select :modelname,models.map{|k,v| [k,k] },{:prompt=>'choose model'},:class=>"form-control"%>
   </div>
 
 
@@ -33,17 +33,26 @@
   <% create_val =  @permission[:per_list].include?("create") unless @permission.nil?%>
   <% delete_val =  @permission[:per_list].include?("destroy") unless @permission.nil?%>
   
-  <%=f.label 'show' %>
-  <%=f.check_box :per_list,{multiple: true,:checked=>true },:show,nil %>
-  <%=f.label 'edit' %>
-  <%=f.check_box :per_list,{multiple: true,:checked=>edit_val},:edit,nil %>
-  <%=f.label 'create' %>    
-  <%=f.check_box :per_list,{multiple: true,:checked=>create_val},:create,nil %>
-  <%=f.label 'delete' %>
-  <%=f.check_box :per_list,{multiple: true,:checked=>delete_val},:destroy,nil %>
-  
+
+  <div class="checkbox">
+    <label>
+    <%=f.check_box :per_list,{multiple: true,:checked=>true},:show,nil %>show</label>
+</div>
+<div class="checkbox">
+    <label>
+    <%=f.check_box :per_list,{multiple: true,:checked=>edit_val},:edit,nil %>edit</label>
+</div>
+<div class="checkbox">
+    <label>
+   <%=f.check_box :per_list,{multiple: true,:checked=>create_val},:create,nil %>create</label>
+</div>
+<div class="checkbox">
+    <label>
+    <%=f.check_box :per_list,{multiple: true,:checked=>delete_val},:destroy,nil %>destroy</label>
+</div>
+ 
 
   
-  <%=f.submit %>
+  <%=f.submit :class=>"btn btn-primary"%>
 
 <%end%>
