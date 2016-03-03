@@ -45,6 +45,14 @@ gem 'rails4-autocomplete'
 # jQuery UI dependency.
 gem 'jquery-ui-rails'
 
+gem 'therubyracer'
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
+
+gem "simple_calendar", "~> 2.0"
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

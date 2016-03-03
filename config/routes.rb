@@ -108,8 +108,8 @@ Rails.application.routes.draw do
 
   # get "/issues/view" => "issues#view_filter"
 
-  devise_for :users,path_prefix: 'd'
-
+  # devise_for :users,:path_prefix=>'d', :controllers => { :omniauth_callbacks => "callbacks" }
+  devise_for :users,path_prefix: 'd',:controllers => { :omniauth_callbacks => "callbacks" }
     
 
 

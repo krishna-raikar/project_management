@@ -2,11 +2,13 @@ class PromaxController < ApplicationController
   
   # before_action :authenticate_user!
    # layout :user_layout
+   # skip_before_filter :verify_authenticity_token
    autocomplete :project, :pname
-
+   # before_action :authenticate_user!
 
    def user_layout
-    if current_user.role.name=="admin"
+    
+    if current_user.role.name.eql?("admin")
       "adminportal"
     else
       "userportal"
@@ -38,8 +40,8 @@ class PromaxController < ApplicationController
     @issue_feature=current_user.assigned_issues.where(issue_category:"feature").where.not(status:"completed").count
     @issue_support=current_user.assigned_issues.where(issue_category:"support").where.not(status:"completed").count
   
-    @pro_mgr=current_user.projects.first.users.find_by(role_id:Role.find_by(name:"manager"))
-    @team_members = current_user.projects.first.users.where(role_id:Role.find_by(name:"employee")).where.not(id:current_user.id)
+    # @pro_mgr=current_user.projects.first.users.find_by(role_id:Role.find_by(name:"manager"))
+    # @team_members = current_user.projects.first.users.where(role_id:Role.find_by(name:"employee")).where.not(id:current_user.id)
     
 
     @p = request.query_parameters
@@ -72,6 +74,7 @@ class PromaxController < ApplicationController
   end
 
   def index
+    # raise current_user.inspect
     render :layout => user_layout
   end
 
