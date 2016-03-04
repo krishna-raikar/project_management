@@ -59,10 +59,13 @@ class ApplicationController < ActionController::Base
     # if params[:controller].eql?("users")
     #   redirect_to (:back), :alert => exception.message
     # else 
-      redirect_to (:back) , :alert => exception.message
-      redirect_to "/"+params[:controller] , :alert => exception.message
+      
+      # redirect_to (:back) , :alert => exception.message
+      # redirect_to "/"+params[:controller] , :alert => exception.message
+      redirect_to (request.referer.present? ? :back : root_url), :alert => exception.message
       # redirect_to request.env["HTTP_REFERER"] , :alert => exception.message
     # end
   end
+  
 
 end

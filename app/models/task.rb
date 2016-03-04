@@ -29,4 +29,7 @@ class Task < ActiveRecord::Base
 		errors.add(:entry_date,  "can't be in the past") if
         !entry_date.blank? and entry_date != Date.today
 	end
+
+       	 # alias_attribute :start_time, :startdate ##Where 'start' is a attribute of type 'Date' accessible through MyModel's relationship
+
 end

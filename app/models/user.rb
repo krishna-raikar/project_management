@@ -13,8 +13,16 @@ class User < ActiveRecord::Base
           user.provider = auth.provider
           user.uid = auth.uid
           user.email = auth.info.email
-          user.update_attributes(firstname:auth.info.first_name)
-          user.update_attributes(lastname:auth.info.last_name) 
+          if auth.provider.eql?("facebook")
+            a=auth.info.name
+            first=a.slice(0...a.index(" "))
+            last =a.slice(a.index(" ")+1...a.length)
+            user.update_attributes(firstname:first)
+            user.update_attributes(lastname:last) 
+          else
+            user.update_attributes(firstname:auth.info.first_name)
+            user.update_attributes(lastname:auth.info.last_name) 
+          end
           user.update_attributes(role_id:2)
           user.password = Devise.friendly_token[0,20]
         end
@@ -46,10 +54,10 @@ class User < ActiveRecord::Base
   # has_many :projects,through: :issues
   
 
-  validates_uniqueness_of :email
+  validates :email, uniqueness: true
 
   # validates :firstname, :email, :role_id, presence: true
   validates :firstname,format: {with: /\A[a-zA-Z0-9]{2,20}\Z/}, :unless => Proc.new{|f| f.blank?}
   validates :lastname,format: {with: /\A[a-zA-Z0-9]{2,20}\Z/}, :unless => Proc.new{|f| f.blank?}
-
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 end

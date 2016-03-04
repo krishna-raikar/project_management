@@ -55,7 +55,7 @@
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><%=link_to "Profile",user_path(current_user.id)%></li>
-          <li><%= link_to "Account settings",edit_user_registration_path(current_user.id)%></li>
+          <li><%= link_to "Account settings",edit_user_path(current_user.id)%></li>
                   
           <li><%=link_to "logout",destroy_user_session_path,method: :delete%></li>
           
@@ -114,6 +114,8 @@
                 <li <%=request.path == '/attachments'? "class=active": ""%>>
                 <%=link_to "attachments",project_attachments_path(@proj)%>
                 </li>
+                <li <%=request.path == (calendars_path)? "class=active": ""%>><a href=<%=calendars_path(@proj)%>>Calendar</a></li>
+                
                 <% if user_signed_in? %>
                 <li><%= link_to "Logout", destroy_user_session_path,method: :delete %></li>
                 <%end%>
@@ -128,10 +130,10 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        
+                        <%if notice or alert%>
                         <p class="notice"><%= notice %></p>
                         <p class="alert"><%= alert %></p>
-
+                        <%end%>
                         <%= yield %>
                         
                     </div>

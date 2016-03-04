@@ -1,23 +1,12 @@
 class UsersController<ApplicationController
   load_and_authorize_resource :only => [:index,:edit, :show,:destroy] 
-  layout :user_layout
+  # layout :user_layout
 
   def user_layout
     if current_user.role.name=="admin"
       "adminportal"
     else
-
-      # a= request.path
-      # a = a.slice(1...a.length)
-      # # a="a/b/c/d"
-      # # raise a.inspect
-      # q= a.slice(0...(a.index('/')))
-      # # raise q.inspect
-      # unless q.eql?("users")
-      #   "userportal"
-      # else
         "userportal"
-      # end
     end
   end
 
@@ -30,7 +19,7 @@ class UsersController<ApplicationController
         dontshowid[0]=User.select('id').find_by(role_id:Role.find_by(name:"admin"))
         dontshowid[1]=current_user.id
         @users = User.where.not(id:dontshowid)
-      render 'devise/index'
+      render 'devise/index',layout: user_layout
     end
 
     # def new
@@ -48,16 +37,18 @@ class UsersController<ApplicationController
     # end
 
     def edit
-      raise "e".inspect
-    	render 'devise/edit'
+      # raise "e".inspect
+    	render 'devise/edit',layout: user_layout
+      # raise current_user.password.inspect
     end
 
     def update
+      # raise params[:user].inspect
        if @user.update(user_param)
         flash[:notice] = "user updated successfully"
-        redirect_to users_path
+        redirect_to (:back)
       else
-        render 'devise/edit'
+        render 'devise/edit',layout: user_layout
       end
     end
 
@@ -66,7 +57,7 @@ class UsersController<ApplicationController
         flash[:notice] = "user deleted successfully"
         redirect_to users_path
       else
-        render 'devise/index',:layout=>"user_firsthome"
+        render 'devise/index',:layout=>user_layout
       end
     end
 
@@ -75,13 +66,18 @@ class UsersController<ApplicationController
       unless flag
         redirect_to user_path(current_user.id)
       else
-    	  render 'devise/show'
+    	  render 'devise/show',:layout => user_layout
       end
     end
 
 
     def set_param
-      @user = User.find_by(id:current_user.id)
+      # raise current_user.inspect
+      if current_user.role.name.eql?("admin")
+        @user = User.find_by(id:params[:id])
+      else  
+        @user = User.find_by(id:current_user.id)
+      end
     end
 
     def user_param

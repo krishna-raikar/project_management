@@ -23,7 +23,7 @@
 
   <div class="field">
     <%=f.label :modelname%>
-    <% models=['all','project','task','issue','user'] %>
+    <% models=['all','project','task','issue','user','project user'] %>
     <%=f.select :modelname,models.map{|k,v| [k,k] },{:prompt=>'choose model'},:class=>"form-control"%>
   </div>
 

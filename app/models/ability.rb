@@ -6,31 +6,33 @@ class Ability
     #
       user ||= User.new # guest user (not logged in)
        # raise user.inspect
-      if user.role.name=="admin"
-        can :manage, :all
-      elsif user.role.name=="employee"
-        # val = ["view"]
-        # val.each do |v|
-          # pro = "project"
-          # raise params[:id].inspect
-          # unless ProjectUser.find_by(user_id:user.id,:project_id=>params[:id]).nil?
-            can :show, Project  unless ProjectUser.find_by(user_id:user.id,:project_id=>params[:id]).nil?
-            
-            can :show, Task  unless Task.find_by(id:params[:id],user_id:user.id,project_id:params[:project_id]).nil?
-            # raise Task.find_by(id:params[:id],user_id:user.id,project_id:params[:project_id]).nil?.inspect
-            # can :show,Task
-            can :show,Issue unless Issue.find_by("id=? and project_id=? and (creator_id=? or assignee_id=?)",params[:id],params[:project_id],user.id,user.id).nil?
-            
-            can [:show,:edit,:destroy],User, :id => user.id
+      # if user.role.name=="admin"
+      #   can :manage, :all
+      # elsif user.role.name=="employee"
 
-            can :manage,ProjectUser unless ProjectUser.find_by(user_id:user.id,:project_id=>params[:id]).nil?
+      # end
+      #   # val = ["view"]
+      #   # val.each do |v|
+      #     # pro = "project"
+      #     # raise params[:id].inspect
+      #     # unless ProjectUser.find_by(user_id:user.id,:project_id=>params[:id]).nil?
+      #       can :show, Project  unless ProjectUser.find_by(user_id:user.id,:project_id=>params[:id]).nil?
             
-            # can :manage,Attachment unless ProjectUser.find_by(user_id:user.id,:project_id=>params[:id]).nil?
+      #       can :show, Task  unless Task.find_by(id:params[:id],user_id:user.id,project_id:params[:project_id]).nil?
+      #       # raise Task.find_by(id:params[:id],user_id:user.id,project_id:params[:project_id]).nil?.inspect
+      #       # can :show,Task
+      #       can :show,Issue unless Issue.find_by("id=? and project_id=? and (creator_id=? or assignee_id=?)",params[:id],params[:project_id],user.id,user.id).nil?
+            
+      #       can [:show,:edit,:destroy],User, :id => user.id
 
-          # end 
-        # end 
-        # can [:view,:edit], Project
-      end
+      #       can :manage,ProjectUser unless ProjectUser.find_by(user_id:user.id,:project_id=>params[:id]).nil?
+            
+      #       # can :manage,Attachment unless ProjectUser.find_by(user_id:user.id,:project_id=>params[:id]).nil?
+
+      #     # end 
+      #   # end 
+      #   # can [:view,:edit], Project
+      # end
 
       # ProjectUser.find_by(user_id:user.id,:project_id=>params[:id]).nil?
       # Task.find_by(id:3,user_id:1,project_id:1).nil?
@@ -42,7 +44,7 @@ class Ability
 
 
 
-     
+     # raise user.inspect
       arr = Role.all
       arr.each do |u|
         if user.role.name.eql?(u.name)
@@ -53,7 +55,7 @@ class Ability
                  if r.modelname.eql?("all")
                    can [p.to_sym], :all
                  else
-                   if r.modelname.eql?("project") 
+                   if r.modelname.eql?("project") and !p.eql?("create") 
                       can [p.to_sym], r.modelname.capitalize.constantize unless ProjectUser.find_by(user_id:user.id,:project_id=>params[:id]).nil?
                    elsif r.modelname.eql?("task")
                       can [p.to_sym], r.modelname.capitalize.constantize unless Task.find_by(id:params[:id],user_id:user.id,project_id:params[:project_id]).nil?
@@ -61,8 +63,11 @@ class Ability
                       can [p.to_sym], r.modelname.capitalize.constantize unless Issue.find_by("id=? and project_id=? and (creator_id=? or assignee_id=?)",params[:id],params[:project_id],user.id,user.id).nil?
                    elsif r.modelname.eql?("user")
                       can [p.to_sym], r.modelname.capitalize.constantize,:id => user.id
-                   # elsif r.modelname.eql?("ProjectUser") 
-                      # can [p.to_sym], r.modelname.capitalize.constantize
+                   elsif r.modelname.eql?("project user") 
+                     a = r.modelname
+                     model = a.split.map(&:capitalize).join(' ').split(' ').map(&:capitalize).join('')
+                     
+                     can [p.to_sym], model.constantize  unless ProjectUser.find_by(user_id:user.id,:project_id=>params[:project_id]).nil?
                    else   
                       can [p.to_sym], r.modelname.capitalize.constantize
                    end
@@ -72,6 +77,9 @@ class Ability
             end  
         end
       end
+
+
+
     #
     # The first argument to `can` is the action you are giving the user
     # permission to do.

@@ -12,7 +12,7 @@ class Project < ActiveRecord::Base
 
 
     validates :pname, :startdate, :enddate, :duedate, :status, presence: true
-	validates :pname,format: {with: /\A[a-zA-Z0-9]{2,20}\Z/}, :unless => Proc.new{|f| f.blank?}
+	validates :pname,length: { minimum: 30 }, :unless => Proc.new{|f| f.blank?}
 	validate :startdate_check
 	validate :enddate_check
 	validate :duedate_check

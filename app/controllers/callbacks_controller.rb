@@ -1,23 +1,46 @@
 class CallbacksController < Devise::OmniauthCallbacksController
     def facebook
-        raise request.env["omniauth.auth"].image.inspect
-        @user = User.from_omniauth(request.env["omniauth.auth"])
-        sign_in_and_redirect @user
-        # raise request.env["omniauth.auth"].inspect
+        @user=check_exists
+        if @user.nil?
+            @user = User.from_omniauth(request.env["omniauth.auth"])
+            if Attachment.find_by(attachable_id:@user.id).nil?          
+                att = @user.build_attachment() 
+                att.update_attributes(remote_file_url:request.env["omniauth.auth"].info.image.gsub('http://','https://'))
+                att.save!
+            else
+                 att = Attachment.find_by(attachable_id:@user.id) 
+            end
+            sign_in_and_redirect @user
+        else
+            sign_in_and_redirect @user, event: :authentication
+        end
     end
 
      def google_oauth2
-        # raise request.env["omniauth.auth"].info.image.inspect
-        @user = User.from_omniauth(request.env["omniauth.auth"])
 
-        # raise @user.inspect
-        if Attachment.find_by(attachable_id:@user.id).nil?          
-            att = @user.build_attachment() 
-            att.update_attributes(remote_file_url:request.env["omniauth.auth"].info.image)
-            att.save!
+        @user=check_exists
+        if @user.nil?
+            # raise "e".inspect
+            @user = User.from_omniauth(request.env["omniauth.auth"])
+            if Attachment.find_by(attachable_id:@user.id).nil?          
+                att = @user.build_attachment() 
+                att.update_attributes(remote_file_url:request.env["omniauth.auth"].info.image)
+                att.save!
+            else
+                 att = Attachment.find_by(attachable_id:@user.id) 
+            end
+            sign_in_and_redirect @user
         else
-             att = Attachment.find_by(attachable_id:@user.id) 
+            # raise @user.inspect
+            sign_in_and_redirect @user, event: :authentication
         end
-        sign_in_and_redirect @user
+    end
+
+
+    def check_exists
+         auth=request.env["omniauth.auth"]
+         
+         @user = User.find_by(email:auth.info.email)
+         return @user
     end
 end

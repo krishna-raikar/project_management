@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
   
 
+  # get 'calendars/index'
+
   get 'projects/:id/overview' => "projects#overview", as: :overview
+  
+  get 'projects/:project_id/calendar' => "calendars#index", as: :calendars
+
+
   get '/dashboard' => "promax#dashboard", as: :dashboard
   get '/attachments' => "attachments#show_all" , as: :attachments
 

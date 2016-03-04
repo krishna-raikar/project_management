@@ -1,0 +1,13 @@
+<h1>my Calendars</h1>
+
+
+
+
+<%= month_calendar(attribute: :startdate, events: @events) do |date,meetings| %>
+  <%= date.day %>
+  <% meetings.each do |meeting| %>
+    <div>
+      <%= meeting.name %>
+    </div>
+  <% end %>
+<% end %>
