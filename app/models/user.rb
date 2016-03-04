@@ -39,14 +39,14 @@ class User < ActiveRecord::Base
 
 
   belongs_to :role
-  has_many :tasks
+  has_many :tasks,dependent: :destroy
  
 
   has_one :attachment,as: :attachable
   accepts_nested_attributes_for :attachment
   
   # has_and_belongs_to_many :projects
-  has_many :project_users
+  has_many :project_users,dependent: :destroy
   has_many :projects, through: :project_users
 
   has_many :own_issues,:class_name=>'Issue',foreign_key: :creator_id

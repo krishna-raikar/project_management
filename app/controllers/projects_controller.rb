@@ -8,13 +8,7 @@ class ProjectsController < ApplicationController
     if current_user.role.name=="admin"
       "adminportal"
     else
-      # unless request.path.eql?("/projects")
-      # raise "e".inspect
       "userportal" 
-      # "user_firsthome"
-    # else
-      # "user_firsthome"
-      # end
     end
   end
 
@@ -24,7 +18,6 @@ class ProjectsController < ApplicationController
 
       unless current_user.role.name.eql?("admin")
         @projects = current_user.projects      
-        # render template:@projects
          render "index_emp"
       else
         unless params[:search_text].nil?
@@ -44,8 +37,11 @@ class ProjectsController < ApplicationController
     def create
       # raise params[:project].inspect
       @project = Project.new(project_param)
+      @prouser=@project.project_users.new(user_id:current_user.id)
+
       if @project.save
         flash[:notice] = "project created successfully"
+        @prouser.save
         redirect_to projects_path
       else
         render 'new'

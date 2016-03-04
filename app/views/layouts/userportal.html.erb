@@ -75,7 +75,8 @@
         <%
            show_flag =false
           if controller.controller_name.eql?("projects") 
-            unless params[:id].nil?
+            if action_name.eql?("show")
+
               show_flag = true
             end  
           else
@@ -113,8 +114,11 @@
                 </li>
                 <li <%=request.path == '/attachments'? "class=active": ""%>>
                 <%=link_to "attachments",project_attachments_path(@proj)%>
+
                 </li>
-                <li <%=request.path == (calendars_path)? "class=active": ""%>><a href=<%=calendars_path(@proj)%>>Calendar</a></li>
+                <li <%=request.path == (calendars_path(@proj))? "class=active": ""%>>
+                  <%=link_to "Calendar",calendars_path(@proj)%>
+                </li>
                 
                 <% if user_signed_in? %>
                 <li><%= link_to "Logout", destroy_user_session_path,method: :delete %></li>

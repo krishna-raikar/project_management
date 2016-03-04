@@ -3,7 +3,7 @@ class IssuesController < ApplicationController
   layout :user_layout
   
   def user_layout
-    if current_user.role.name=="admin"
+    if current_user.role.name == "admin"
       "adminportal"
     else
       "userportal"

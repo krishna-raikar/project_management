@@ -2,7 +2,7 @@ class Project < ActiveRecord::Base
 
     has_many :tasks
     
-    has_many :project_users
+    has_many :project_users,dependent: :destroy
     has_many :users, through: :project_users
     # has_and_belongs_to_many :users
 
@@ -12,7 +12,7 @@ class Project < ActiveRecord::Base
 
 
     validates :pname, :startdate, :enddate, :duedate, :status, presence: true
-	validates :pname,length: { minimum: 30 }, :unless => Proc.new{|f| f.blank?}
+	validates :pname,length: { minimum: 3,maximum:30 }, :unless => Proc.new{|f| f.blank?}
 	validate :startdate_check
 	validate :enddate_check
 	validate :duedate_check

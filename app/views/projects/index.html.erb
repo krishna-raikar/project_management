@@ -18,6 +18,7 @@
 			<td><%=p.enddate%></td>
 			<td><%=p.status%></td>
             <td>
+
 			  <% if can? :show, p%>
   					<%= link_to "view", p %> &nbsp 
 			<% end %>
