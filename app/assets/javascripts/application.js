@@ -23,5 +23,4 @@
 //= require autocomplete-rails
 
 //= require jquery
-//= require bootstrap-sprockets
 
