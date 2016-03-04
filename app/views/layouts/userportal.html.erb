@@ -14,7 +14,7 @@
 <nav id="mynav" class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/promax"><%=image-url("Promax.png")%></a>
+      <a class="navbar-brand" href="/promax"><%=image_tag("Promax.png",:id=>"logo")%></a>
     </div>
     <ul class="nav navbar-nav">
       <li <%=request.path=="/promax"? "class=active": "" %>><a href="/promax">Home</a></li>
