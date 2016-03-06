@@ -1,3 +1,18 @@
 // Place all the styles related to the issues controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+#issue_entry_date_1i,#issue_entry_date_2i,#issue_entry_date_3i{
+	display : inline-block;
+}
+
+#issue_entry_date_1i{
+	width : 37%;
+}
+#issue_entry_date_2i{
+	width : 30%;
+}
+#issue_entry_date_3i{
+	width:30%;
+}

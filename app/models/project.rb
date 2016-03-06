@@ -11,7 +11,7 @@ class Project < ActiveRecord::Base
 
 
 
-    validates :pname, :startdate, :enddate, :duedate, :status, presence: true
+    validates :pname, :enddate,:startdate,  :duedate, :status, presence: true
 	validates :pname,length: { minimum: 3,maximum:30 }, :unless => Proc.new{|f| f.blank?}
 	validate :startdate_check
 	validate :enddate_check

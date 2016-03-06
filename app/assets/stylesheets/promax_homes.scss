@@ -18,6 +18,17 @@
 
 
 
+
+.myheader{
+  padding-top: 107px;
+color: #fff !important;
+}
+
+
+#error_explanation{
+  color : red;
+}
+
 /********************************************/
 /*social login */
 
@@ -117,7 +128,7 @@ span{
 }
 
 .bgimage{
- 	background-image: image-url("promax_home.jpg");
+ 	background-image: image-url("promax-home.jpg");
   background-size:     cover;                     
     background-repeat:   no-repeat;
  	font-size : 15px;

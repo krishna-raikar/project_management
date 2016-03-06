@@ -1,3 +1,34 @@
 // Place all the styles related to the tasks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+#task_startdate_1i,#task_startdate_2i,#task_startdate_3i{
+	display : inline-block;
+}
+
+#task_startdate_1i{
+	width : 37%;
+}
+#task_startdate_2i{
+	width : 30%;
+}
+#task_startdate_3i{
+	width:30%;
+}
+
+
+
+#task_enddate_1i,#task_enddate_2i,#task_enddate_3i{
+	display : inline-block;
+}
+
+#task_enddate_1i{
+	width : 37%;
+}
+#task_enddate_2i{
+	width : 30%;
+}
+#task_enddate_3i{
+	width:30%;
+}

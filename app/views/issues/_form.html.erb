@@ -51,7 +51,7 @@
   </div>
 
   <div class="field">
-  	<%=f.label :entry_date%>
+  	<%=f.label :entry_date%><br>
   	<%=f.date_select :entry_date,{},:class=>"form-control"%>
   </div>
 
@@ -82,7 +82,7 @@
     </div>
   <% end %>
   
-
-  <%=f.submit :class=>"btn btn-primary"%>
+  <br>
+  <%=f.submit :class=>"btn btn-primary btn-block"%>
 
 <%end%>
