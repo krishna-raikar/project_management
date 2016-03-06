@@ -1,5 +1,12 @@
 class CalendarsController < ApplicationController
 	layout :user_layout
+  # require 'timers'
+  # timers = Timers::Group.new
+
+  # five_second_timer = timers.after(5) { 
+  #   puts "Take five"
+  #   raise "timer done".inspect }
+  # require 'clockwork'
 
   def user_layout
     if current_user.role.name=="admin"

@@ -102,6 +102,7 @@ class ProjectsController < ApplicationController
     @issue_support=current_user.assigned_issues.where(issue_category:"support",project_id:@cur_proj.id).where.not(status:"completed").count
     
     @pro_mgr=current_user.projects.find(@cur_proj.id).users.find_by(role_id:Role.find_by(name:"manager"))
+    # raise @pro_mgr.inspect
     @team_members = current_user.projects.find(@cur_proj.id).users.where(role_id:Role.find_by(name:"employee")).where.not(id:current_user.id)
     # raise @pro_mgr.inspect
 

@@ -44,7 +44,10 @@ class ProjectUsersController < ApplicationController
       proj = @cur_proj.id
 
       #first delete existing project users if any
-      ProjectUser.delete(ProjectUser.where(project_id:@cur_proj.id).pluck(:id))
+      a = ProjectUser.where(project_id:@cur_proj)
+      projs=a.where.not("user_id=? and project_id=?",current_user.id,proj)
+      # raise projs.inspect
+      ProjectUser.delete_all(id:projs.pluck(:id))
 
       emp_list.each do |e|
          # raise e.inspect

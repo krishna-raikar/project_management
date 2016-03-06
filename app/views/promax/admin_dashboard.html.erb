@@ -4,40 +4,40 @@
 admin dashboard</div>
 
 <div class="dash">
-<div class="row">
+<div class="row text-center">
 	<div class="col-lg-3">
-		<div class="panel ">
-	  	<div class="panel-heading">Projects Count</div>
-	  	<div class="panel-body">
-	  	<div class="h2 text-center"><%=@proj_count%></div>
-              new : <%=@pro_new_count%>
-              running : <%=@pro_running_count%>
+		<div class="mpanel">
+	  	
+	  	
+	  	<div class="h2 ">Projects</div>
+	  	      Total : <%=@proj_count%><br>
+              new : <%=@pro_new_count%><br>
+              running : <%=@pro_running_count%><br>
               completed : <%=@pro_complete_count%>
-      	  	</div>
+      	 </div>
+	  	
+
+	</div>
+	<div class="col-lg-3">
+		<div class="mpanel">
+		<div class="h2">Files Count</div>
+	  	 <%=@attach_count%>
+	    </div>
+	</div>
+	<div class="col-lg-3">
+		<div class="mpanel">
+	  	<div class="h2">User Count</div>
+	  	
+	  	Registered Users :<%=@user_count%><br>
+	  	Employees : <%= @emp_count%><br>
+	  	Managers  : <%= @mgr_count%><br>
 	  	
 	    </div>
 	</div>
 	<div class="col-lg-3">
-		<div class="panel">
-	  	<div class="panel-heading">Files Count</div>
-	  	<div class="panel-body">
-	  	 <%=@attach_count%></div>
-	    </div>
-	</div>
-	<div class="col-lg-3">
-		<div class="panel">
-	  	<div class="panel-heading">User Count</div>
-	  	<div class="panel-body">
-	  	Registered Users :<%=@user_count%>
-	  	Employees : <%= @emp_count%><br>
-	  	Managers  : <%= @mgr_count%>
-	  	</div>
-	    </div>
-	</div>
-	<div class="col-lg-3">
-		<div class="panel">
-	  	<div class="panel-heading">Messages</div>
-	  	<div class="panel-body">#count</div>
+		<div class="mpanel">
+	  	<div class="h2">Messages</div>
+	  	
 	    </div>
 	</div>
 </div>

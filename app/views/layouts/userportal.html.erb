@@ -5,8 +5,7 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>  
 
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-
+  
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -14,7 +13,7 @@
 <nav id="mynav" class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/promax"><%=image_tag("Promax.png",:id=>"logo")%></a>
+      <a class="navbar-brand" href="/promax"><%=image_tag("promax-logo",:id=>"logo")%></a>
     </div>
     <ul class="nav navbar-nav">
       <li <%=request.path=="/promax"? "class=active": "" %>><a href="/promax">Home</a></li>
@@ -72,12 +71,16 @@
 
         %>
         <%if show_flag %>
-        <div id="wrapper" style="padding-top : 50px">
+        <div id="wrapper">
         <div id="sidebar-wrapper" >
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                     <a href="#">
-                        PromAX
+                        <% if current_user.attachment.nil? %>
+                        <%=image_tag("thumb_md_default-profile.png",:class=>"img-circle")%>
+                        <%else%>
+                        <%=image_tag current_user.attachment.file.url(:thumb_md),:class=>"img-rounded"%>
+                        <%end%>
                     </a>
                 </li>
                   <%  
@@ -88,25 +91,37 @@
                  end    
                  %>
                 <li <%=request.path == '/overview'? "class=active": ""%>>
-                <%=link_to "overview",overview_path(@proj)%>
+                <%=link_to overview_path(@proj) do%>
+                <span class="glyphicon glyphicon-home"></span>overview
+                  <%end%>
                 </li>
 
                 <li <%=request.path == '/tasks'? "class=active": ""%>>
-                <%=link_to "my tasks",project_tasks_path(@proj)%>
+                <%=link_to project_tasks_path(@proj) do%>
+                <span class="glyphicon glyphicon-check"></span>my Tasks
+                  <%end%>
                 </li>
                 <li <%=request.path == '/issues'? "class=active": ""%>>
-                <%=link_to "issues",project_issues_path(@proj)%>
+                <%=link_to project_issues_path(@proj) do%>
+                <span class="glyphicon glyphicon-tasks"></span>issues
+                  <%end%>
                 </li>
                 <li <%=request.path == '/attachments'? "class=active": ""%>>
-                <%=link_to "attachments",project_attachments_path(@proj)%>
-
+                <%=link_to project_attachments_path(@proj) do%>
+                     <span class="glyphicon glyphicon-paperclip"></span>Attachments
+                  <%end%>
                 </li>
                 <li <%=request.path == (calendars_path(@proj))? "class=active": ""%>>
-                  <%=link_to "Calendar",calendars_path(@proj)%>
+                  <%=link_to calendars_path(@proj) do%>
+                    <span class="glyphicon glyphicon-calendar"></span>calendar
+                  <%end%>
                 </li>
                 
                 <% if user_signed_in? %>
-                <li><%= link_to "Logout", destroy_user_session_path,method: :delete %></li>
+                <li><%= link_to destroy_user_session_path,method: :delete  do %>
+                <span class="glyphicon glyphicon-off"></span>Logout
+                  <%end%>
+                </li>
                 <%end%>
                 
             </ul>

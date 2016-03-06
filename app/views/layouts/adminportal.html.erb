@@ -4,8 +4,9 @@
   <title>Admin Portal</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
+  
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -14,7 +15,7 @@
  <nav id="mynav" class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/promax"><%=image_tag("Promax.png",:id=>"logo")%></a>
+      <a class="navbar-brand" href="/promax"><%=image_tag("promax-logo.png",:id=>"logo")%></a>
     </div>
     <ul class="nav navbar-nav">
       <li <%=request.path=="/promax"? "class=active": "" %>><a href="/promax">Home</a></li>
@@ -26,15 +27,13 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li>
-        
+        <a>
         <%=form_tag("/projects", method: :get) do %>
-         <input name="search_text" id="search_text" type="text" class="form-control" placeholder="Search" data-autocomplete="/promax/autocomplete_project_pname"></li>
-
-         <li>
-
-       <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+         <input name="search_text" id="search_text" type="text" class="form-control-sb" placeholder="Search" data-autocomplete="/promax/autocomplete_project_pname">
+         
+       <button type="submit" class="form-control-sb"><span class="glyphicon glyphicon-search"></span></button>
        <%end%>
-     
+      </a>
       </li>
      
       <li><a>
@@ -73,48 +72,54 @@
 
                 <li class="sidebar-brand">
                     <a href="#">
-                        PromAX
+                        <% if current_user.attachment.nil? %>
+                        <%=image_tag("thumb_md_default-profile.png",:class=>"img-circle")%>
+                        <%else%>
+                        <%=image_tag current_user.attachment.file.url(:thumb_md),:class=>"img-rounded"%>
+                        <%end%>
                     </a>
                 </li>
                 <li <%=request.path == '/'? "class=active": ""%>><a href="/dashboard">
 
-                Dashboard
-                <span class="glyphicon glyphicon-home"></span></a>
+                
+                <span class="glyphicon glyphicon-home"></span>Dashboard</a>
                 </li>
-                <li <%=request.path == '/projects'? "class=active": ""%>><a href="/projects">Projects
+                <li <%=request.path == '/projects'? "class=active": ""%>><a href="/projects">
 
-                <span class="glyphicon glyphicon-list-alt"></span>
+                <span class="glyphicon glyphicon-list-alt"></span>Projects
                 </a>  
 
                 </li>
                 
-                <li <%=request.path == '/users'? "class=active": ""%>><a href="/users">Employees
-                <span class="glyphicon glyphicon-user"></span>
+                <li <%=request.path == '/users'? "class=active": ""%>><a href="/users">
+                <span class="glyphicon glyphicon-user"></span>Employees
                 </a>
                 </li>
                 
-                <li <%=request.path == '/permissions'? "class=active": ""%>><a href="/permissions">Permissions
-                <span class="glyphicon glyphicon-lock"></span>
+                <li <%=request.path == '/permissions'? "class=active": ""%>><a href="/permissions">
+                <span class="glyphicon glyphicon-lock"></span>Permissions
                 </a></li>
                 
-                <li <%=request.path == '/attachments'? "class=active": ""%>><a href="/attachments">Attachments
+                <li <%=request.path == '/attachments'? "class=active": ""%>><a href="/attachments">
 
-                <span class="glyphicon glyphicon-paperclip "></span>
+                <span class="glyphicon glyphicon-paperclip "></span>Attachments
 
                 </li>
 
                 
 
-                <li <%=request.path == '/roles'? "class=active": ""%>><a href="/roles">Manage Roles
-                <span class="glyphicon glyphicon-wrench"></span>
+                <li <%=request.path == '/roles'? "class=active": ""%>><a href="/roles">
+                <span class="glyphicon glyphicon-wrench"></span>Manage Roles
 
                 </a>
                 </li>
-               
+                
 
                 <% if user_signed_in? %>
-                <li><%= link_to "Logout", destroy_user_session_path,method: :delete %>
-                
+
+                <li><%= link_to destroy_user_session_path,method: :delete do%>
+                     <span class="glyphicon glyphicon-off"></span>logout
+                <%end%>
                 </li>
                 <%end%>
             </ul>

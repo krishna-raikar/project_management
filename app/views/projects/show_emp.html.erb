@@ -5,18 +5,26 @@
 	
 	<table id="proj_det_tb" class="table">
 	<tr>
-	<td>name :<%=@project.pname%></td>
+		<td>name</td>	
+		<td>start_date</td>
+		<td>end_date</td>
+		<td>due_date</td>
+		<td>status</td>
+		<td>description</td>
+	</tr>
+	<tr>
+	<td><%=@project.pname%></td>
 	
-	<td>start_date : <%=@project.startdate%></td>
+	<td> <%=@project.startdate%></td>
 	
-	<td>end_date : <%=@project.enddate%></td>
+	<td> <%=@project.enddate%></td>
 	
-	<td>due_date : <%=@project.duedate%></td>	
+	<td> <%=@project.duedate%></td>	
 	
-	<td>status : <%=@project.status%></td>
+	<td> <%=@project.status%></td>
 
 	
-	<td>description : <%=@project.description%></td>
+	<td> <%=@project.description%></td>
 	</tr>
 	</table>
 </div>

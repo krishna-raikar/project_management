@@ -2,12 +2,127 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+::-webkit-scrollbar {
+    width: 5px;
+}
+ 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 1px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px #cc6600; 
+}
+
+
+
+/********************************************/
+/*social login */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**********************************************/
+
+
+
+
+
+
+
+
+
+
+
+#slideshow1 { 
+    padding: 0px; 
+}
+
+#slideshow1 > div { 
+    position: absolute; 
+    overflow:hidden;
+    width: 100%; 
+    height: 700px; 
+    background-position : center center;
+}
+.bgimg1{
+  width : 100%;
+  height : 100%;
+}
+.bgwrap{
+  margin: 0;
+  max-width: 100%;
+  max-height : 100%;
+  border: 1px solid red;
+  position:relative;
+}
+.bghome{
+  position : absolute;
+  top : 0px;
+  left : 0px;
+  max-width : 100%;
+  max-height : 600px;
+
+}
+
+/*********************************************/
+
+#proj_det_tb tr:first-child{
+  color : #6ba0bd;
+}
+#proj_det_tb tr td{
+  border-top : 0px;
+}
+#proj_det_tb{
+  background-color : #f3f280;
+}
+#proj_det_tb  td:last-child{
+  border-right : 0px;
+}
+#proj_det_tb  td {
+    padding: 8px;
+    line-height: 1.42857143;
+    text-align : center;
+    border-right: 1px solid #B6B781;
+}
+
+body{
+  background-color : #ebebe0 !important;
+}
+
+.form-control-sb{
+  border-radius : 1px;
+  border : 1px solid #fff;
+  color : #000;
+  padding:3px;
+
+}
+
+span{
+  padding-right : 10px;
+}
 
 .bgimage{
- 	background-image: image-url("bgimage.jpg");
+ 	background-image: image-url("promax_home.jpg");
+  background-size:     cover;                     
+    background-repeat:   no-repeat;
  	font-size : 15px;
  	font-weight : bold;
- 	background-position : 0px -250px;
+ 	background-position : 0px -80px;
  	
  }
 
@@ -68,16 +183,21 @@
 
 #logo{
   width : 100px;
-  height : 20px;
+  height : 40px;
 }
 
 
 #mynav{
   font-family: Montserrat, sans-serif;
-  background: #333333;
+  /*background: #333333;*/
+  background:#003333;
   padding : 10px;
 }
 
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:focus, .navbar-inverse .navbar-nav > .active > a:hover {
+    color: #fff;
+    background-color: #329B9F;
+}
 
 
 #user-show-tb tr td:first-child{
@@ -100,27 +220,41 @@
   text-transform :uppercase;
 }
 
+ 
+
 
 .dash .panel-heading {
-   background-color: #669999!important;
-   font-weight : bold! important;
-   color : white !important;
-   border : 1px solid #669999;
+   background-color: #8FE1BE !important;
+font-weight: bold !important;
+color: white !important;
+border: 1px solid #1CE3C0;
 }
+
+
 
 .dash .panel{
-  box-shadow : 1px 1px 2px #ccc !important;
-  border-radius : 0px !important;
-  min-height : 250px;
-  max-height : 300px;
-  overflow-y : auto;
-}
-
-.dash .panel-heading:hover{
-  background-color: #476b6b!important;
+background-color: rgb(246, 246, 217);
+border-radius: 0px !important;
+min-height: 250px;
+max-height: 300px;
+overflow-y: auto;
 }
 
 
+.mpanel{
+  min-height: 150px;
+background-color: #f3ebeb;
+padding: 5px;
+border-radius: 10px;
+}
+
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+    background-color: #fff;
+    padding : 10px;
+    border-radius: 15px;
+}
 
 
 .cur_proj_tle{
@@ -134,11 +268,16 @@
 
 
 #page-content-wrapper{
-  
   overflow : auto;
 }
 
-
+.sidebar-nav > .sidebar-brand {
+    height: 127px;
+    font-size: 18px;
+    line-height: 60px;
+    text-indent: 20px;
+    padding: 18px 22px;
+}
 
 
 
@@ -188,10 +327,10 @@ font-weight : bold;
 }
 
 #wrapper > #sidebar-wrapper {
-    background-color: #004466;
-    background: -o-linear-gradient(#ccc, #004466); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#ccc, #004466); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#0a0a0a,#f66);
+    background-color: #1a001a;
+    /*background: -o-linear-gradient(#ccc, #004466);  For Opera 11.1 to 12.0 */
+    /*background: -moz-linear-gradient(#ccc, #004466); /* For Firefox 3.6 to 15 */
+    /*background: linear-gradient(#0a0a0a,#a0a0a0);*/
     width : 180px;
     font-size : 15px;
 }

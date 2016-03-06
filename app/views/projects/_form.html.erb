@@ -23,24 +23,24 @@
 
   <div class="field">
   	<%=f.label :startdate%>
-  	<%=f.date_select :startdate,{},:class=>"form-control"%>
+  	<%=f.text_field :startdate,:class=>"form-control"%>
 
   </div>
 
   <div class="field">
   	<%=f.label :enddate%>
-  	<%=f.date_select :enddate,{},:class=>"form-control"%>
+  	<%=f.text_field :enddate,:class=>"form-control"%>
   </div>
 
   <div class="field">
   	<%=f.label :duedate%>
-  	<%=f.date_select :duedate,{},:class=>"form-control"%>
+  	<%=f.text_field :duedate,:class=>"form-control"%>
   </div>
 
   <div class="field">
     <%=f.label :status%>
     <% status = ['new','In progres','pending','canceled','completed'] %>
-    <%= f.select :status,status.each_with_index.map {|name, index| [name,name]},{:prompt=>"select status"},:class=>"form-control" %>
+    <%= f.select :status,status.each_with_index.map {|name, index| [name,name]},{:prompt=>"select status",:selected=>"new"},:class=>"form-control" %>
   </div>
 
   <div class="field">
@@ -48,7 +48,7 @@
   	<%=f.text_area :description,:class=>"form-control"%>
   </div>
 
-  <%=f.submit %>
+  <%=f.submit :class=>"btn btn-primary btn-block"%>
 
 <%end%>
 
@@ -57,8 +57,6 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-    // $('#project_startdate').datepicker();
-    // $('#project_enddate').datepicker();
-    // $('#project_duedate').datepicker();
+   
   });
 </script>
