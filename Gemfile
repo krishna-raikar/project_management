@@ -53,6 +53,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 
 gem "simple_calendar", "~> 2.0"
+gem 'rails_12factor'
 
 
 
