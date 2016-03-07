@@ -57,6 +57,7 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
 
   # validates :firstname, :email, :role_id, presence: true
+  validates :phone,length:{minimum: 7,maximum: 11}, allow_blank: true
   validates :firstname,format: {with: /\A[a-zA-Z0-9]{2,20}\Z/}, :unless => Proc.new{|f| f.blank?}
   validates :lastname,format: {with: /\A[a-zA-Z0-9]{2,20}\Z/}, :unless => Proc.new{|f| f.blank?}
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i

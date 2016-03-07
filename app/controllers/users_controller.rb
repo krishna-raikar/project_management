@@ -44,12 +44,34 @@ class UsersController<ApplicationController
 
     def update
       # raise params[:user].inspect
-       if @user.update(user_param)
-        flash[:notice] = "user updated successfully"
-        redirect_to (:back)
-      else
-        render 'devise/edit',layout: user_layout
-      end
+
+      #  if @user.update_without_password(user_param)
+
+      #   flash[:notice] = "user updated successfully"
+      #   redirect_to :back
+
+      # else
+      #   # raise "e".inspect
+      #   render 'devise/edit',layout: user_layout
+      # end
+
+
+      # @user = User.find(params[:id])
+        if params[:user][:password].blank?
+          if @user.update(user_param.except(:password))
+            redirect_to edit_user_path
+            flash[:notice] = "User updated."
+          else
+            rrender 'devise/edit',layout: user_layout
+          end
+        else
+          if @user.update(user_param)
+            redirect_to edit_user_path
+            flash[:notice] = "User updated."
+          else
+            render 'devise/edit',layout: user_layout
+          end
+        end
     end
 
     def destroy
@@ -81,7 +103,7 @@ class UsersController<ApplicationController
     end
 
     def user_param
-      params.require(:user).permit(:firstname,:lastname,:phone,:email,:role_id,attachment_attributes: [:file,:description])
+      params.require(:user).permit(:firstname,:lastname,:phone,:email,:role_id,:password,attachment_attributes: [:file,:description])
     end
 
 end
