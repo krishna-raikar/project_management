@@ -61,7 +61,11 @@ class Ability
                         can [:show_emp],r.modelname.capitalize.constantize
                         can [p.to_sym], r.modelname.capitalize.constantize    
                       else
-                        can [p.to_sym], r.modelname.capitalize.constantize unless ProjectUser.find_by(user_id:user.id).nil?
+                        if params[:id]
+                          can [p.to_sym], r.modelname.capitalize.constantize unless ProjectUser.find_by(user_id:user.id,:project_id=>params[:id]).nil?
+                        else
+                          can [p.to_sym], r.modelname.capitalize.constantize unless ProjectUser.find_by(user_id:user.id).nil?
+                        end
                       end
                    elsif r.modelname.eql?("task")
                       can [p.to_sym], r.modelname.capitalize.constantize unless Task.find_by(id:params[:id],user_id:user.id,project_id:params[:project_id]).nil?
