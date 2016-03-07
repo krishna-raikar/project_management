@@ -4,6 +4,7 @@
 
 
 <%= month_calendar(attribute: :startdate, events: @events) do |date,meetings| %>
+  <%raise @events.inspect %>
   <%= date.day %>
   <% meetings.each do |meeting| %>
     <div>
