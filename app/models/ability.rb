@@ -68,9 +68,9 @@ class Ability
                         end
                       end
                    elsif r.modelname.eql?("task") and !p.eql?("create") 
-                      can [p.to_sym], r.modelname.capitalize.constantize unless Task.find_by(id:params[:id],user_id:user.id,project_id:params[:project_id]).nil?
+                      can [p.to_sym], r.modelname.capitalize.constantize #unless Task.find_by(id:params[:id],user_id:user.id,project_id:params[:project_id]).nil?
                    elsif r.modelname.eql?("issue") and !p.eql?("create") 
-                      can [p.to_sym], r.modelname.capitalize.constantize unless Issue.find_by("id=? and project_id=? and (creator_id=? or assignee_id=?)",params[:id],params[:project_id],user.id,user.id).nil?
+                      can [p.to_sym], r.modelname.capitalize.constantize #unless Issue.find_by("id=? and project_id=? and (creator_id=? or assignee_id=?)",params[:id],params[:project_id],user.id,user.id).nil?
                    elsif r.modelname.eql?("user")
                       can [p.to_sym], r.modelname.capitalize.constantize,:id => user.id
                    elsif r.modelname.eql?("project user") 
