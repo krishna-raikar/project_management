@@ -21,7 +21,9 @@
             
          <a href="#"><%= devise_error_messages! %></a>     
          <%- flash.each do |name, msg| -%>
+         <% unless msg.include?("Signed out successfully") %>
          <%= content_tag :div, msg, :id => "flash_#{name}",class:"error_message" if msg.is_a?(String) %>
+         <%end%>
          <%- end -%> 
 
            
