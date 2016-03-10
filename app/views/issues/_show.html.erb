@@ -1,0 +1,27 @@
+
+ <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Issue Details</h3>
+  </div>
+  <div class="modal-body">
+    <p>
+      <table class="table table-hover table-bordered">
+      <tbody>
+      <tr><td>issue_id </td><td><%=@issue.id%></td></tr>
+      			<tr><td>issue_category </td><td> <%=@issue.issue_category%></td></tr>
+      			<tr><td>title </td><td> <%=@issue.title%></td></tr>
+      			<tr><td>description </td><td> <%=@issue.description%></td></tr>
+      			<tr><td>priority </td><td> <%=@issue.priority%></td></tr>
+      			<tr><td>severity </td><td> <%=@issue.severity%></td></tr>
+      			<tr><td>status </td><td> <%=@issue.status%></td></tr>
+      			<tr><td>entry_date </td><td> <%=@issue.entry_date%></td></tr>
+      			<tr><td>creator_id </td><td> <%=@issue.creator_id%></td></tr>
+      			<tr><td>assignee_id </td><td> <%=@issue.assignee_id%></td></tr>
+      </tbody>
+      </table>
+          </p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-primary">Save changes</button>
+  </div>

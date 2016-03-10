@@ -41,20 +41,14 @@
   	<%=f.text_area :description,:class=>"form-control"%>
   </div>
 
-  <div class="field">
-    <%=f.label :project%>
-    <%=f.collection_select :project_id,Project.where(:id=>current_user.projects),:id,:pname,{:prompt=>'choose project'},:class=>"form-control"%>
-  </div>
+  
 
   <div class="field">
     <%=f.label :assign_to%>
-    <%=f.collection_select :user_id,User.where.not(role_id:Role.where(name:["admin","manager"])),:id,:firstname,{:prompt=>'choose user'},:class=>"form-control"%>
+    <%=f.collection_select :user_id,assign_to_list,:id,:firstname,{:prompt=>'choose user'},:class=>"form-control"%>
   </div>
 
-  <div class="field">
-    <%=f.label :entry_date%>
-    <%=f.date_select :entry_date,{},:class=>"form-control"%>
-  </div>
+  
   <br><br>
   <%=f.submit :class=>"btn btn-primary" %>
 

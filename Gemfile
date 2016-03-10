@@ -29,6 +29,7 @@ gem 'devise'
 
 #gems used  by me
 gem 'jquery-datatables-rails', '~> 1.12.2'
+gem 'will_paginate'
 
 gem 'cancancan', '~> 1.10'
 
@@ -55,6 +56,8 @@ gem 'omniauth-google-oauth2'
 gem "simple_calendar", "~> 2.0"
 gem 'rails_12factor'
 
+gem 'fullcalendar-rails', '~> 2.6.0.0'
+gem 'momentjs-rails'
 
 
 # Use ActiveModel has_secure_password

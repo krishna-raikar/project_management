@@ -3,12 +3,35 @@
 
 
 
-<%= month_calendar(attribute: :startdate, events: @events) do |date,meetings| %>
-  <%raise @events.inspect %>
-  <%= date.day %>
-  <% meetings.each do |meeting| %>
-    <div>
-      <%= meeting.name %>
-    </div>
-  <% end %>
-<% end %>
+<button type="button" id="my-prev-button" class="btn btn-default">prev Year</button><button type="button" id="my-next-button" class="btn btn-default">Next Year</button>
+<div id='calendar' style="width:700px;"></div>
+
+
+
+<script>
+ $(document).ready(function(e,data){  
+ var date = new Date();
+        var d = date.getDate();
+        var m = date.getMonth();
+        var y = date.getFullYear();  
+        $('#my-next-button').click(function() {
+            $('#calendar').fullCalendar('nextYear');
+        });
+        $('#my-prev-button').click(function() {
+            $('#calendar').fullCalendar('prevYear');
+        });
+    
+        $('#calendar').fullCalendar({   
+
+            header: { center: 'month,agendaWeek,agendaDay' },
+            backgroundColor: "red",
+            eventLimit: 3,
+            theme: true,
+            editable: true,
+            durationEditable: true,
+            events: 'calendars.json'
+            
+            
+        });
+    });
+</script>

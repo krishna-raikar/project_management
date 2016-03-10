@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
     # before_filter :load_and_authorize_resource 
-    load_and_authorize_resource :only => [:edit, :show,:destroy]            
+    load_and_authorize_resource :only => [:create,:edit, :show,:destroy]            
     # load_and_authorize_resource                  #common method to restrict all controller methods
     
   layout :user_layout
@@ -110,10 +110,17 @@ class ProjectsController < ApplicationController
     @tasks = current_user.tasks.where(project_id:@cur_proj.id)
     if @p[:task_query].eql?("all")
       @tasks = current_user.tasks.where(project_id:@cur_proj.id)
+      render :json=>@tasks.to_json
+      return
     elsif @p[:task_query].eql?("imp")
-      @tasks=current_user.tasks.where(enddate:Date.today+1,project_id:@cur_proj.id)
+      @tasks=current_user.tasks.where(enddate:[Date.today+1,Date.today],project_id:@cur_proj.id)
+      render :json=>@tasks.to_json
+      return
     elsif @p[:task_query].eql?("com") 
       @tasks=current_user.tasks.where(status:"finished",project_id:@cur_proj.id)
+
+      render :json=>@tasks.to_json
+      return
     end
 
    @p = request.query_parameters
@@ -136,6 +143,40 @@ class ProjectsController < ApplicationController
   end
 
 
+
+  def filter_task_issue
+    @cur_proj = Project.find(params[:id])
+    @p = request.query_parameters
+    unless @p[:task_query].nil?
+      @tasks = current_user.tasks.where(project_id:@cur_proj.id)
+      if @p[:task_query].eql?("all")
+        @tasks = current_user.tasks.where(project_id:@cur_proj.id)
+      elsif @p[:task_query].eql?("imp")
+        @tasks=current_user.tasks.where(enddate:[Date.today+1,Date.today],project_id:@cur_proj.id)     
+      elsif @p[:task_query].eql?("com") 
+        @tasks=current_user.tasks.where(status:"finished",project_id:@cur_proj.id)      
+      end
+      render :json=>@tasks.to_json
+      return
+    end
+   
+   unless @p[:issue_query].nil?
+     @p = request.query_parameters
+      @issues = current_user.assigned_issues.where(project_id:@cur_proj.id)
+      if @p[:issue_query].eql?("all")
+        @issues = current_user.assigned_issues.where(project_id:@cur_proj.id)
+      elsif @p[:issue_query].eql?("imp")
+        @issues=current_user.assigned_issues.where(project_id:@cur_proj.id,priority:"urgent")
+      elsif @p[:issue_query].eql?("com") 
+        @issues=current_user.assigned_issues.where(status:"finished",project_id:@cur_proj.id)
+      end
+      render :json=>@issues.to_json
+      return
+    end
+    
+  end
+
+
     def set_param
       @project = Project.find(params[:id])
     end
@@ -143,5 +184,8 @@ class ProjectsController < ApplicationController
     def project_param
       params.require(:project).permit(:pname,:startdate,:enddate,:duedate,:status,:description )
     end
+
+
+
 
 end

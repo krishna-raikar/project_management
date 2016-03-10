@@ -24,7 +24,7 @@ class CalendarsController < ApplicationController
   def index
   	# raise proj_id.in/spect
   	@events = Task.where(project_id:@cur_proj.id,user_id:current_user.id)
-  	render :layout => "userportal"
-  	# raise @events.inspect
+    render :layout=>"userportal"
+  	
   end
 end

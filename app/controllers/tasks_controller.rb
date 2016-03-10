@@ -35,7 +35,8 @@ class TasksController < ApplicationController
     end
 
     def create
-      @task = Task.new(task_param)
+
+      @task = @cur_proj.tasks.new(task_param)
       if @task.save
         flash[:notice] = "task created successfully"
         redirect_to project_tasks_path
@@ -74,6 +75,7 @@ class TasksController < ApplicationController
     end
 
     def task_param
-      params.require(:task).permit(:name,:startdate,:enddate,:status,:description,:time_spent,:project_id,:user_id,:entry_date)
+      param=params.require(:task).permit(:name,:startdate,:enddate,:status,:description,:time_spent,:project_id,:user_id,:entry_date)
+      p=param.merge(:entry_date=>Date.today) 
     end
 end

@@ -89,35 +89,37 @@ Current Project :<%=@cur_proj.pname%>
 	  	<div class="panel-body">
 	  		<ul class="nav nav-tabs">
 	  		
-			  <li <%=request.fullpath == (overview_path+"?task_query=all")? "class=active": ""%>>
-        
-        <%=link_to "all",overview_path+"?task_query=all"%></li>
-			  <li <%=request.fullpath == overview_path+"?task_query=imp"? "class=active": ""%>>
-         <%=link_to "important",overview_path+"?task_query=imp"%>
+			  <li class="active">
+        <a id="task_all_bt" data-toggle="tab" href="#task_tb">All</a></li>
+			  <li>
+         <a id="task_imp_bt" data-toggle="tab" href="#task_tb">important</a>
         </li>
-			  <li <%=request.fullpath == overview_path+"?task_query=com"? "class=active": ""%>>
-         <%=link_to "completed",overview_path+"?task_query=com"%>
-         </li>
+			  <li>
+         <a id="task_com_bt" data-toggle="tab" href="#task_tb">Completed</a>
+        </li>
 
 			</ul>
             <div class=well>
-            	<table class="table table-hover">
-            	<thead>
+            	<table id="task_tb" class="table table-hover fade in active">
+               <thead>
+            	  <tr>
             		<th>name</th>
             		<th>description</th>
             		<th>days remaining</th>
-            	</thead>
-            	<tbody>
-            		
+            	  </tr>
+                </thead>
+                <tbody>
             		<% @tasks.each do|t|%>
-            		    <tr>
-            			<td><%=t.name%></td>
-            			<td><%=t.description%></td>
-            			<td><%=t.enddate%></td>
-            			</tr>
-            		<%end%>
+                    <tr>
+                  <td><%=t.name%></td>
+                  <td><%=t.description%></td>
+                  <td><%=t.enddate%></td>
+                  </tr>
+                  <%end%>
             		
-            	</tbody>
+            		</tbody>
+            		
+            	
             	</table>
 
             </div>	
@@ -133,19 +135,19 @@ Current Project :<%=@cur_proj.pname%>
 	  	<div class="panel-body">
 	  		<ul class="nav nav-tabs">
 	  		
-			  <li <%=request.fullpath == (overview_path+"?issue_query=all")? "class=active": ""%>>
-        <%=link_to "all",(overview_path+"?issue_query=all")%></li>
-        <li <%=request.fullpath == (overview_path+"?issue_query=imp")? "class=active": ""%>>
-        <%=link_to "urgent",(overview_path+"?issue_query=imp")%></li>
-        <li <%=request.fullpath == (overview_path+"?issue_query=com")? "class=active": ""%>>
-        <%=link_to "completed",(overview_path+"?issue_query=com")%></li>
+			  <li>
+          <a id="issue_all_bt" data-toggle="tab" href="#issue_tb">All</a></li>
+        <li>
+          <a id="issue_imp_bt" data-toggle="tab" href="#issue_tb">Important</a></li>
+        <li>
+          <a id="issue_com_bt" data-toggle="tab" href="#issue_tb">Resolved</a></li>
 
 
 			  
 
 			</ul>
             <div class=well>
-            	<table class="table table-hover">
+            	<table id="issue_tb" class="table table-hover fade in active">
             	<thead>
             		<th>title</th>
             		<th>description</th>
@@ -173,3 +175,97 @@ Current Project :<%=@cur_proj.pname%>
 
 </div>
 
+
+
+
+<script>
+
+function build_task_table(data){
+   $('#task_tb tbody').html("");
+        var $tbody = $('#task_tb tbody');
+        $.each(data, function() {
+          var $tr = $('<tr></tr>').appendTo($tbody);
+          $('<td></td>').text(this.name).appendTo($tr);
+          $('<td></td>').text(this.description).appendTo($tr);
+          $('<td></td>').text(this.enddate).appendTo($tr);
+        })  
+}
+
+function build_issue_table(data){
+   $('#issue_tb tbody').html("");
+        var $tbody = $('#issue_tb tbody');
+        $.each(data, function() {
+          var $tr = $('<tr></tr>').appendTo($tbody);
+          $('<td></td>').text(this.title).appendTo($tr);
+          $('<td></td>').text(this.description).appendTo($tr);
+          $('<td></td>').text(this.severity).appendTo($tr);
+        })  
+}
+
+
+$(document).ready(function(){
+  $("#task_imp_bt").click(function(){
+      $(this).addClass("active");
+      $.get('<%=overview_filter_path%>'+"?task_query=imp",function(data){
+        // alert(JSON.stringify(data));
+         build_task_table(data);
+           
+    });
+
+  });
+   $("#task_com_bt").click(function(){
+    
+    
+      $.get('<%=overview_filter_path%>'+"?task_query=com",function(data){
+        // alert(JSON.stringify(data));
+       build_task_table(data);
+    });
+
+  });
+    $("#task_all_bt").click(function(){
+     
+      $.get('<%=overview_filter_path%>'+"?task_query=all",function(data){
+        // alert(JSON.stringify(data));        
+        build_task_table(data);
+    });
+
+  });
+
+
+
+
+     $("#issue_imp_bt").click(function(){
+      $.get('<%=overview_filter_path%>'+"?issue_query=imp",function(data){
+        // alert(JSON.stringify(data));
+         build_issue_table(data);
+           
+      });
+      });
+       $("#issue_all_bt").click(function(){
+      $.get('<%=overview_filter_path%>'+"?issue_query=all",function(data){
+        // alert(JSON.stringify(data));
+         build_issue_table(data);
+           
+      });
+      });
+
+       $("#issue_com_bt").click(function(){
+      $.get('<%=overview_filter_path%>'+"?issue_query=com",function(data){
+        // alert(JSON.stringify(data));
+         build_issue_table(data);
+           
+      });
+      });
+
+
+
+
+       $('#tasktab a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+      });
+  
+});
+
+
+</script>

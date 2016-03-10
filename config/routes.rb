@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   # get 'calendars/index'
 
   get 'projects/:id/overview' => "projects#overview", as: :overview
+  get 'projects/:id/overview/filterres' => "projects#filter_task_issue", as: :overview_filter
   
-  get 'projects/:project_id/calendar' => "calendars#index", as: :calendars
+  get 'projects/:project_id/calendars' => "calendars#index", as: :calendars
 
 
   get '/dashboard' => "promax#dashboard", as: :dashboard
