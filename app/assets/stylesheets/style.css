@@ -1,0 +1,57 @@
+.myform-control{
+	border:3px solid grey;
+	background: #fcfcfc;
+border: 2px solid #e7e7e7;
+margin: 20px auto;
+padding: 15px;
+width: 100%;
+display: block;
+border-radius: 3px;
+font-size: 14px;
+transition: opacity 0.4s;
+text-align: left;
+height: auto;
+}
+
+
+.form-wrapper{
+	border-radius: 5px;
+	padding:20px 40px 20px;
+	background-color: #fff;
+
+}
+
+
+.ffield,.lfield{	
+	width:49%;
+	display:inline-block;
+}
+
+body{
+background-color: #20245A !important;
+/*background: -moz-radial-gradient(circle, #55cfcf, #25373E);*/
+}
+
+
+.myform-btn{
+background: #76d281;
+border: 0px !important;
+border: 2px solid #e7e7e7;
+padding: 15px;
+border-radius: 3px;
+color: #fff;
+font-size: 1.5em;
+transition: 0.5s all ease-in-out;
+}
+
+
+
+.myform-btn:hover{
+background: #00cc66;
+transition: 0.5s all ease-in-out;
+}
+
+.loginbt{
+	padding-bottom: 10px;
+	border-bottom: 2px solid #b8b894 !important;	
+}

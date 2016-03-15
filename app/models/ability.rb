@@ -9,7 +9,7 @@ class Ability
       # if user.role.name=="admin"
       #   can :manage, :all
       # elsif user.role.name=="employee"
-
+      # can :manage,:all 
       # end
       #   # val = ["view"]
       #   # val.each do |v|

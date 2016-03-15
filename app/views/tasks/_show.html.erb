@@ -1,0 +1,26 @@
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Issue Details</h3>
+  </div>
+  <div class="modal-body">
+    <p>
+      <table class="table table-hover table-bordered">
+      <tbody>
+      <tr><td>Task_id </td><td><%=@task.id%></td></tr>
+      			<tr><td>task name </td><td> <%=@task.name%></td></tr>
+      			<tr><td>start date </td><td> <%=@task.startdate%></td></tr>
+      			<tr><td>end date </td><td> <%=@task.enddate%></td></tr>
+      			<tr><td>time_spent </td><td> <%=@task.time_spent%></td></tr>
+      			<tr><td>status </td><td> <%=@task.status%></td></tr>
+      			<tr><td>description </td><td> <%=@task.description%></td></tr>
+      			<tr><td>project id </td><td> <%=@task.project_id%></td></tr>
+      			<tr><td>user id </td><td> <%=@task.user_id%></td></tr>
+      			<tr><td>entry date </td><td> <%=@task.entry_date%></td></tr>
+      </tbody>
+      </table>
+          </p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>

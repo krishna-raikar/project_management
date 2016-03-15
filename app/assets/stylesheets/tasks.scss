@@ -32,3 +32,42 @@
 #task_enddate_3i{
 	width:30%;
 }
+
+
+
+
+
+
+
+#tasks{
+	box-shadow : 0px 0px 2px #ccc;
+
+}
+
+#tasks tr td{
+	padding: 10px;
+	
+}
+
+#tasks tr td:last-child{
+	color : white;
+	background-color : #ff5050;
+}
+#tasks tr td:last-child a{
+	color : white;
+	font-weight : bold;
+}
+
+
+
+#tasks tr td:first-child:hover{
+	color : white !important;
+	background-color : #3366ff !important;
+	transition : 0.2s all ease-out;
+	cursor: pointer;
+}
+
+
+.ttitle{
+	font-weight:bold;
+}

@@ -1,0 +1,60 @@
+<div class="hstyle">Tasks</div>
+
+
+
+
+<table id="tasks1" border=2 class="table table-striped table-bordered">
+	<thead>
+		<th>task_id</th>
+		<th>name</th>
+		<th>startdate</th>
+		<th>enddate</th>
+		<th>status</th>
+		<th>description</th>
+		<th>time spent</th>
+		<th>project</th>
+		<th>assigned_to</th>
+		<th>entrydate</th>
+		<th>Actions</th>
+	</thead>
+	<tbody>
+		<% @tasks.each do |t| %>
+			<tr>
+			<td><%=t.id%></td>
+			<td><%=t.name%></td>
+			<td><%=t.startdate%></td>
+			<td><%=t.enddate%></td>
+			<td><%=t.status%></td>
+			<td><%=t.description%></td>
+			<td><%=t.time_spent%></td>
+			<td><%=t.project_id%></td>
+			<td><%=t.user_id%></td>
+			<td><%=t.entry_date%></td>
+			<td>
+
+			<% if can? :show, p%>
+  					<%= link_to "view", [@cur_proj,t] %> &nbsp 
+			<% end %>
+			<% if can? :edit, p%>
+  				    <%= link_to "edit", edit_project_task_path(@cur_proj,t) %>&nbsp 
+			<% end %>
+			<% if can? :destroy, p%>
+  					 <%=link_to 'delete', [@cur_proj,t], method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%>
+			<% end %>
+
+			</td>
+			</tr>
+		<%end%>
+	</tbody>
+</table>
+
+<% if can? :create, Task.new%>
+<%= link_to "new_task", new_project_task_path %>
+<%end%>
+
+
+<script>
+	$(document).ready(function(){
+		 $("#tasks1").dataTable()
+	});
+</script>
