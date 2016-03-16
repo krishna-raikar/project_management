@@ -1,20 +1,11 @@
 
 
+<div class="col-lg-4 col-lg-offset-4">
 
-
-<div class="col-lg-6">
-<div class="h2 text-center myheader">
-  Powerful and easy way to manage your projects and team<br>
-  <%=image_tag "promax-logo.png"%>
-</div>
-
-</div>
-
-
-<div class="col-lg-6">
+  <div class="text-center">
+  <%=image_tag "promax-logo.png",:class=>"loglogo"%>
+  </div>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-
-<div class="col-lg-8">  
 
 <div class="form-wrapper">
            <div class="h3 text-center">Log In</div> 
@@ -24,18 +15,12 @@
          <%= content_tag :div, msg, :id => "flash_#{name}",class:"error_message" if msg.is_a?(String) %>
          <%end%>
          <%- end -%> 
-
-           
-
-              
-              
-                  <%= f.email_field :email, autofocus: true,:class=>"myform-control",:placeholder=>"email address" %>
+         
+         <%= f.email_field :email, autofocus: true,:class=>"myform-control",:placeholder=>"email address" %>
                 
-                  <%= f.password_field :password, autocomplete: "off",:class=>"myform-control",:placeholder=>"password"%>
+         <%= f.password_field :password, autocomplete: "off",:class=>"myform-control",:placeholder=>"password"%>
               
-            
-  
-  
+
   <% if devise_mapping.rememberable? -%>
 
     <div class="field">
@@ -52,17 +37,12 @@
 
 
 
-    <span class="btn btn-lg btn-facebook fa fa-facebook ffield"></span>
-
- 
+    <span class="btn btn-lg btn-facebook fa fa-facebook ffield"></span> 
     <span class="btn btn-lg btn-google fa fa-google lfield"></span>
 
 <%= render "devise/shared/links" %>
-
-
-
- 
 </div>
 
-</div>
+
+
 </div>

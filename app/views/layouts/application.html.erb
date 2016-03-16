@@ -19,16 +19,13 @@
    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.min.js"></script> -->
    
   <%= csrf_meta_tags %>
-</head>
-<body>
-
-
+  </head>
+  <body class="bghome">
 
   <div class="toplogin text-left"><%=link_to "LOGIN",new_user_session_path,:class=>"btn btn-warning" %></div> 
 
-   <%= yield %>
-
-
+  <%= yield %>
+  
 </body>
 </html>
 

@@ -1,5 +1,5 @@
-<div class="hstyle">Issues</div>
 
+<div class="hstyle">Issues</div>
 
 
 <% if current_user.role.name!="admin"%>
@@ -16,6 +16,7 @@
  <%end%>
 
 <br>
+
 <table id="issues" border=2 class="table table-striped table-bordered" data-source="<%= project_issues_url(format: "json") %>">
 	<thead>
 		<th>issue_id</th>

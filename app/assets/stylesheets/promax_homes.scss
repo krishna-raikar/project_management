@@ -20,9 +20,28 @@
 
 
 .myheader{
-  padding-top: 107px;
-color: #fff !important;
+  padding-top: 10px;
+  opacity : 0.1;
+  color: #fff !important;
 }
+
+.mylogo{
+  opacity : 0.1;
+  margin-top : 150px;
+}
+
+.movehead{
+  opacity : 1.0;
+  padding-top: 107px;
+  transition: 1s all ease;
+}
+
+.movelogo{
+  opacity : 1.0;
+  margin-top : 0px;
+  transition: 1s all ease;
+}
+
 
 
 #error_explanation{
@@ -81,14 +100,7 @@ color: #fff !important;
   border: 1px solid red;
   position:relative;
 }
-.bghome{
-  position : absolute;
-  top : 0px;
-  left : 0px;
-  max-width : 100%;
-  max-height : 600px;
 
-}
 
 /*********************************************/
 
@@ -99,7 +111,7 @@ color: #fff !important;
   border-top : 0px;
 }
 #proj_det_tb{
-  background-color : #f3f280;
+  background-color : #fcfcfc;
 }
 #proj_det_tb  td:last-child{
   border-right : 0px;
@@ -199,13 +211,12 @@ span{
 #mynav{
   font-family: Montserrat, sans-serif;
   /*background: #333333;*/
-  background:#003333;
   padding : 10px;
 }
 
 .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:focus, .navbar-inverse .navbar-nav > .active > a:hover {
     color: #fff;
-    background-color: #329B9F;
+    background-color: #0D7D49;
 }
 
 
@@ -216,17 +227,17 @@ span{
 
 
 .hstyle{
-    font-size : 15px;
-  color : #fff;
-  font-weight : bold;
-  width : 100%;
-  padding : 10px;
-  border-radius : 50px;
-  padding-left : 30px;
-  background-color : #00e673;
-  margin-bottom : 20px;
-  font-family: Montserrat, sans-serif;
-  text-transform :uppercase;
+font-size: 15px;
+color: #fff;
+font-weight: bold;
+width: 100%;
+padding: 5px;
+border-radius: 4px;
+padding-left: 30px;
+background-color: #292839;
+margin-bottom: 20px;
+font-family: Montserrat, sans-serif;
+text-transform: uppercase;
 }
 
  
@@ -251,10 +262,10 @@ overflow-y: auto;
 
 
 .mpanel{
-  min-height: 150px;
-background-color: #f3ebeb;
+ min-height: 150px;
+background-color: #f6f6f6;
 padding: 5px;
-border-radius: 10px;
+border-radius: 0px;
 }
 
 .row {
@@ -262,7 +273,7 @@ border-radius: 10px;
     margin-left: -15px;
     background-color: #fff;
     padding : 10px;
-    border-radius: 15px;
+    border-radius: 3px;
 }
 
 .row-login{
@@ -340,12 +351,30 @@ font-weight : bold;
 }
 
 #wrapper > #sidebar-wrapper {
-    background-color: #1a001a;
+    background-color:  #1E1E20;
     /*background: -o-linear-gradient(#ccc, #004466);  For Opera 11.1 to 12.0 */
     /*background: -moz-linear-gradient(#ccc, #004466); /* For Firefox 3.6 to 15 */
     /*background: linear-gradient(#0a0a0a,#a0a0a0);*/
     width : 180px;
     font-size : 15px;
+}
+
+
+.sidebar-nav li {
+    border-bottom: 1px solid #252625;
+}
+
+
+.sidebar-nav li a {
+    color: #fff;
+    transition : 0.2s all ease;
+}
+
+
+.sidebar-nav li a:hover {
+   color: #fefffd;
+background: #77e995;
+transition : 0.2s all ease;
 }
 
 

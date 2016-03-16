@@ -1,11 +1,25 @@
+.bghome{
+	background-color: #006699 !important;
+	
+}
+
+.bguser{
+	background-color: #e0e0d1 !important;
+	
+}
+
+
+
+
+
+
 .myform-control{
 	border:3px solid grey;
 	background: #fcfcfc;
 border: 2px solid #e7e7e7;
-margin: 20px auto;
+margin: 5px auto;
 padding: 15px;
 width: 100%;
-display: block;
 border-radius: 3px;
 font-size: 14px;
 transition: opacity 0.4s;
@@ -27,10 +41,6 @@ height: auto;
 	display:inline-block;
 }
 
-body{
-background-color: #20245A !important;
-/*background: -moz-radial-gradient(circle, #55cfcf, #25373E);*/
-}
 
 
 .myform-btn{
@@ -54,4 +64,10 @@ transition: 0.5s all ease-in-out;
 .loginbt{
 	padding-bottom: 10px;
 	border-bottom: 2px solid #b8b894 !important;	
+}
+
+
+.loglogo{
+	width: 150px;
+height: 60px;
 }

@@ -40,12 +40,13 @@
 
 
 #tasks{
-	box-shadow : 0px 0px 2px #ccc;
+	/*box-shadow : 0px 0px 2px #ccc;*/
 
 }
 
 #tasks tr td{
 	padding: 10px;
+	opacity : 0.8;
 	
 }
 
@@ -61,10 +62,9 @@
 
 
 #tasks tr td:first-child:hover{
-	color : white !important;
-	background-color : #3366ff !important;
 	transition : 0.2s all ease-out;
 	cursor: pointer;
+	opacity : 1;
 }
 
 
