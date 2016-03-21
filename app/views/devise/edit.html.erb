@@ -4,7 +4,7 @@
 <div class="panel-heading">Edit form</div>
 <div class="panel-body">
 
-<%= form_for(@user) do |f| %>
+<%= form_for @user,:html=>{:id=>"useredit_form"} do |f| %>
 
   <% if @user.errors.any? %>
     <div id="error_explanation">

@@ -47,7 +47,9 @@ Current Project :<%=@cur_proj.pname%>
         # raise @pro_mgr.nil?.inspect  
         unless @pro_mgr.nil? %>
           <%if current_user.id==@pro_mgr.id%>
-          <%=@pro_mgr.firstname + "| You"%>
+          <%=@pro_mgr.firstname+" "+@pro_mgr.lastname + "| You"%>
+          <%else%>
+          <%=@pro_mgr.firstname+" "+@pro_mgr.lastname%>
           <%end%>
         <%end%>
         <br>

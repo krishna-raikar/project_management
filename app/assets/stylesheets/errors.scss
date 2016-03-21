@@ -7,3 +7,14 @@
 .error_message{
 	color : red;
 }
+
+
+label[class="error"]{
+	color : red;
+	transition : 1s all ease;
+}
+
+input[class*="error"],select[class*="error"]{
+	border-color :red;
+	transition : 1s all ease;
+}

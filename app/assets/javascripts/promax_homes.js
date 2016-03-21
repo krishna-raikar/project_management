@@ -7,5 +7,7 @@ $(document).ready(function(){
 	$(".movhead").removeClass("myheader");
 	$(".mylogo").addClass("movelogo");
 	$(".movelogo").removeClass("mylogo");
-   
+    
+    
+     
 });

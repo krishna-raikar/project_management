@@ -5,7 +5,7 @@
   <div class="text-center">
   <%=image_tag "promax-logo.png",:class=>"loglogo"%>
   </div>
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name),:html => { :id => "login_form" }) do |f| %>
 
 <div class="form-wrapper">
            <div class="h3 text-center">Log In</div> 
@@ -37,8 +37,10 @@
 
 
 
-    <span class="btn btn-lg btn-facebook fa fa-facebook ffield"></span> 
-    <span class="btn btn-lg btn-google fa fa-google lfield"></span>
+    <a href=<%=user_omniauth_authorize_path("facebook")%>><span class="btn btn-lg btn-facebook fa fa-facebook ffield"></span> </a>
+
+    <a href=<%=user_omniauth_authorize_path("google_oauth2")%>>
+    <span class="btn btn-lg btn-google fa fa-google lfield"></span></a>
 
 <%= render "devise/shared/links" %>
 </div>
@@ -46,3 +48,6 @@
 
 
 </div>
+
+
+

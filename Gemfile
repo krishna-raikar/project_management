@@ -60,6 +60,10 @@ gem 'fullcalendar-rails', '~> 2.6.0.0'
 gem 'momentjs-rails'
 
 
+gem 'jquery-validation-rails'
+
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
