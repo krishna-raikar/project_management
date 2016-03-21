@@ -6,7 +6,9 @@ class Issue < ActiveRecord::Base
 
 	has_one :attachment,as: :attachable
 	accepts_nested_attributes_for :attachment 
+    
 
+    # validates :avatar, { content_type: ["image/jpeg", "image/gif", "image/png", "image/png"] }
 	validates :title,:description,:priority,:severity,:status,:issue_category,:entry_date,:project_id,:creator_id,:presence => true
 	validates :title,format: {with: /\A[a-zA-Z]{2,20}\Z/}, :unless => Proc.new{|f| f.blank?}
 	validate :entry_date_check

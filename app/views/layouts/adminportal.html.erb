@@ -45,7 +45,7 @@
         <% if current_user.attachment.nil? %>
         <%=image_tag("thumb_sm_default-profile.png",:class=>"img-circle")%>
         <%else%>
-        <%=image_tag current_user.attachment.file.url(:thumb_sm),:class=>"img-circle"%>
+        <%=image_tag current_user.attachment.file.url(:thumb_sm),:class=>"img-circle" unless current_user.attachment.file.nil?%>
         <%end%>
         <span class="caret"></span></a>
         <ul class="dropdown-menu">

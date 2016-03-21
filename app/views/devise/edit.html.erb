@@ -19,11 +19,11 @@
   <% end %>
 
   <div class="ffield">
-    <%= f.text_field :firstname, autofocus: true,:class=>"myform-control" %>
+    <%= f.text_field :firstname, autofocus: true,:class=>"myform-control",:placeholder=>"firstname" %>
   </div>
 
   <div class="lfield">
-    <%= f.text_field :lastname, autofocus: true,:class=>"myform-control" %>
+    <%= f.text_field :lastname, autofocus: true,:class=>"myform-control",:placeholder=>"lastname" %>
   </div>
 
   <% if current_user.role.name!="admin"%>
@@ -34,19 +34,19 @@
 
 
   <div class="field">
-    <%= f.text_field :phone, autofocus: true,:class=>"myform-control" %>
+    <%= f.text_field :phone, autofocus: true,:class=>"myform-control",:placeholder=>"phone" %>
   </div>
 
   <%if f.object.role.name.eql?("admin")%>
   <div class="field">
-    <%= f.email_field :email, autofocus: true,:class=>"myform-control" %>
+    <%= f.email_field :email, autofocus: true,:class=>"myform-control",:placeholder=>"email" %>
   </div>
   <%end%>
 
  
 
   <div class="field">
-    <%= f.password_field :password,:class=>"myform-control" %>
+    <%= f.password_field :password,:class=>"myform-control",:placeholder=>"password" %>
   </div>
  <br>
 
