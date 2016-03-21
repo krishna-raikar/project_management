@@ -22,10 +22,11 @@
   </head>
   <body class="bghome">
 
-  <div class="toplogin text-left"><%=link_to "LOGIN",new_user_session_path,:class=>"btn btn-warning" %></div> 
-
-  <%= yield %>
+  <div class="toplogin text-left"><%=link_to "LOGIN",new_user_session_path,:id=>"login_bt",:class=>"btn btn-warning" %></div> 
   
+  <div id="primary-content">
+  <%= yield %>
+  </div>
 </body>
 </html>
 
