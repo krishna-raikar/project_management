@@ -51,3 +51,35 @@
 
 
 
+
+<script type="text/javascript">
+ 
+ $(document).ready(function () { 
+ $("#login_form").validate({
+    rules : {
+      "user[email]": {
+        required : true,
+        email    : true
+      },
+      "user[password]":{
+         required: true,
+         minlength: 8,
+         maxlength: 25
+      }
+
+    },
+    messages:{
+      "user[email]":{
+        required: "please enter email Id",
+        email: "invalid email id"
+      },
+      "user[password]": {
+        required: "please enter password",
+        minlength: "password must contain min 8 chars",
+        maxlength: "password must contain max 25 chars"
+      }
+
+    }
+ });
+});
+</script>

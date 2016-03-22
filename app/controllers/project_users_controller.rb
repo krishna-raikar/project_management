@@ -22,13 +22,13 @@ class ProjectUsersController < ApplicationController
  
     def index
        if current_user.role.name!="admin"
-         @project_users = ProjectUser.where(project_id:@cur_proj).joins(:project).joins(:user).pluck("projects.pname","users.firstname","project_users.id")
+         @project_users = ProjectUser.where(project_id:@cur_proj).joins(:project).joins(:user).pluck("projects.pname","users.firstname","project_users.id","project_users.user_id")
        else
           a=request.query_parameters
           if a[:view_flag].eql?("true")
-            @project_users = ProjectUser.joins(:project).joins(:user).pluck("projects.pname","users.firstname","project_users.id")
+            @project_users = ProjectUser.joins(:project).joins(:user).pluck("projects.pname","users.firstname","project_users.id","project_users.user_id")
           else
-            @project_users = ProjectUser.where(project_id:@cur_proj).joins(:project).joins(:user).pluck("projects.pname","users.firstname","project_users.id")
+            @project_users = ProjectUser.where(project_id:@cur_proj).joins(:project).joins(:user).pluck("projects.pname","users.firstname","project_users.id","project_users.user_id")
           end 
          
        end      

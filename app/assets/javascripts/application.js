@@ -13,13 +13,14 @@
 //= require moment
 //= require jquery
 
-//= require jquery.validate
-//= require jquery.validate.additional-methods
-
 //= require jquery_ujs
 //= require fullcalendar
 //= require jquery-ui
 //= require autocomplete-rails
+
+//= require jquery.validate
+
+
 
 //= require turbolinks
 //= require_tree .

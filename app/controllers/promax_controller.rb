@@ -29,7 +29,7 @@ class PromaxController < ApplicationController
     @task_finish_count=Task.where(status:"finished").count
 
 
-    @attach_count = Attachment.all.count
+    @attach_count = Attachment.where.not(attachable_type:"User").count
     @user_count = User.all.count - 1
     @emp_count = User.where(role_id: Role.find_by(name: "employee")).count
     @mgr_count = User.where(role_id: Role.find_by(name: "manager")).count
