@@ -33,13 +33,13 @@
 			<%=p[1]%></td>
 			<td>
            
-			<% if can? :show, p%>
+			<% if can? :show, ProjectUser.new%>
   					<%= link_to "view",  project_project_user_path(@cur_proj,p[2]) %> &nbsp 
 			<% end %>
-			<% if can? :edit, p%>
+			<% if can? :edit, ProjectUser.new%>
   				    <%= link_to "edit", edit_project_project_user_path(@cur_proj,p[2]) %>&nbsp 
 			<% end %>
-			<% if can? :destroy, p%>
+			<% if can? :destroy, ProjectUser.new%>
   					 <%=link_to 'delete', project_project_user_path(@cur_proj,p[2]) , method: :delete, data: { confirm: 'record will be deleted.Are you sure?' }%>
 			<% end %>
 

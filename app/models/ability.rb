@@ -76,7 +76,7 @@ class Ability
                    elsif r.modelname.eql?("project user") 
                      a = r.modelname
                      model = a.split.map(&:capitalize).join(' ').split(' ').map(&:capitalize).join('')
-                     
+                     # raise model.inspect       
                      can [p.to_sym], model.constantize  unless ProjectUser.find_by(user_id:user.id,:project_id=>params[:project_id]).nil?
                    else   
                       can [p.to_sym], r.modelname.capitalize.constantize
