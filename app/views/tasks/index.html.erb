@@ -41,7 +41,17 @@
 		<%end%>
 	</tbody>
 </table>
+
+
+<% if can? :create, Task.new%>
+<%= link_to "new_task", new_project_task_path %>
+<%end%>
+
+
 </div>
+
+
+
 
 
 
